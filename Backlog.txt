@@ -11,4 +11,5 @@ SUGGESTIONS:
 -Add a !clanjoindate (google docs)
 -Change roles for members based on killcount (raids kc channel) & send message in admin channel to update the moderators.
 -link discord userid to runscape name. (what if multiple accounts?)
-test22
+
+fdshgkjhsd
