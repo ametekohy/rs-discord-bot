@@ -1,0 +1,262 @@
+{
+  "bosses": [
+    {
+      "name": "Abyssal Sire",
+      "alias": "sire",
+      "killhr": 30,
+      "image": "https://oldschool.runescape.wiki/images/f/fa/Abyssal_Sire_%28phase_1%29.png?0db8f"
+    },
+    {
+      "name": "Alchemical Hydra",
+      "alias": "hydra",
+      "killhr": 27,
+      "image": "https://oldschool.runescape.wiki/images/9/9d/Hydra.png?9572f"
+    },
+    {
+      "name": "Barrows Chests",
+      "alias": "barrows",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/6/64/Barrows_icon.jpg?6f015"
+    },
+    {
+      "name": "Bryophyta",
+      "alias": "bryophyta",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/8/86/Bryophyta.png?090fd"
+    },
+    {
+      "name": "Callisto",
+      "alias": "callisto",
+      "killhr": 30,
+      "image": "https://oldschool.runescape.wiki/images/d/d4/Callisto.png?4612a"
+    },
+    {
+      "name": "Cerberus",
+      "alias": "cerb",
+      "killhr": 61,
+      "image": "https://oldschool.runescape.wiki/images/4/45/Cerberus.png?47f4c"
+    },
+    {
+      "name": "Chambers of Xeric",
+      "alias": "cox",
+      "killhr": 3.5,
+      "image": "https://oldschool.runescape.wiki/images/0/04/Chambers_of_Xeric_logo.png?34a98"
+    },
+    {
+      "name": "Chambers of Xeric: Challenge Mode",
+      "alias": "cm",
+      "killhr": 1.8,
+      "image": "https://oldschool.runescape.wiki/images/a/a1/Chambers_of_Xeric_Challenge_Mode_icon.png?59c3d"
+    },
+    {
+      "name": "Chaos Elemental",
+      "alias": "chaos elemental",
+      "killhr": 48,
+      "image": "https://oldschool.runescape.wiki/images/a/a9/Chaos_Elemental.png?c170c"
+    },
+    {
+      "name": "Chaos Fanatic",
+      "alias": "chaos fanatic",
+      "killhr": 100,
+      "image": "https://oldschool.runescape.wiki/images/d/d8/Chaos_Fanatic.png?8871d"
+    },
+    {
+      "name": "Commander Zilyana",
+      "alias": "sara",
+      "killhr": 25,
+      "image": "https://oldschool.runescape.wiki/images/f/fb/Commander_Zilyana.png?c5eaa"
+    },
+    {
+      "name": "Corporeal Beast",
+      "alias": "corp",
+      "killhr": 14,
+      "image": "https://oldschool.runescape.wiki/images/5/5c/Corporeal_Beast.png?52ebb"
+    },
+    {
+      "name": "Crazy Archaeologist",
+      "alias": "crazy arch",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/c/c0/Crazy_archaeologist.png?3ecc9"
+    },
+    {
+      "name": "Dagannoth Prime",
+      "alias": "prime",
+      "killhr": 96,
+      "image": "https://oldschool.runescape.wiki/images/8/8b/Dagannoth_Prime.png?945b1"
+    },
+    {
+      "name": "Dagannoth Rex",
+      "alias": "rex",
+      "killhr": 96,
+      "image": "https://oldschool.runescape.wiki/images/1/1b/Dagannoth_Rex.png?a99a9"
+    },
+    {
+      "name": "Dagannoth Supreme",
+      "alias": "supreme",
+      "killhr": 96,
+      "image": "https://oldschool.runescape.wiki/images/b/b4/Dagannoth_Supreme.png?81f00"
+    },
+    {
+      "name": "Deranged Archaeologist",
+      "alias": "deranged arch",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/5/53/Deranged_archaeologist.png?32c7e"
+    },
+    {
+      "name": "General Graardor",
+      "alias": "bandos",
+      "killhr": 30,
+      "image": "https://oldschool.runescape.wiki/images/b/b8/General_Graardor.png?4dd90"
+    },
+    {
+      "name": "Giant Mole",
+      "alias": "mole",
+      "killhr": 90,
+      "image": "https://oldschool.runescape.wiki/images/f/fd/Giant_Mole.png?3f58a"
+    },
+    {
+      "name": "Grotesque Guardians",
+      "alias": "guardians",
+      "killhr": 30,
+      "image": "https://oldschool.runescape.wiki/images/c/ca/Fighting_Grotesque_Guardians.png?248ba"
+    },
+    {
+      "name": "Hespori",
+      "alias": "hespori",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/e/ed/Hespori.png?cd901"
+    },
+    {
+      "name": "Kalphite Queen",
+      "alias": "kq",
+      "killhr": 35,
+      "image": "https://oldschool.runescape.wiki/images/5/57/Kalphite_Queen.png?a4955"
+    },
+    {
+      "name": "King Black Dragon",
+      "alias": "kbd",
+      "killhr": 100,
+      "image": "https://oldschool.runescape.wiki/images/e/e9/King_Black_Dragon.png?d25f0"
+    },
+    {
+      "name": "Kraken",
+      "alias": "kraken",
+      "killhr": 80,
+      "image": "https://oldschool.runescape.wiki/images/d/d3/Kraken.png?a4955"
+    },
+    {
+      "name": "Kree'Arra",
+      "killhr": 28,
+      "alias": "arma",
+      "image": "https://oldschool.runescape.wiki/images/f/fd/Kree%27arra.png?65c34"
+    },
+    {
+      "name": "K'ril Tsutsaroth",
+      "alias": "zammy",
+      "killhr": 36,
+      "image": "https://oldschool.runescape.wiki/images/2/2f/K%27ril_Tsutsaroth.png?d22a3"
+    },
+    {
+      "name": "Mimic",
+      "alias": "mimic",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/f/f3/The_Mimic.png?c337b"
+    },
+    {
+      "name": "Obor",
+      "alias": "obor",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/8/88/Obor.png?8ec21"
+    },
+    {
+      "name": "Sarachnis",
+      "alias": "sarachnis",
+      "killhr": 45,
+      "image": "https://oldschool.runescape.wiki/images/e/e9/Sarachnis.png?8f040"
+    },
+    {
+      "name": "Scorpia",
+      "alias": "scorpia",
+      "killhr": 100,
+      "image": "https://oldschool.runescape.wiki/images/3/35/Scorpia.png?517c9"
+    },
+    {
+      "name": "Skotizo",
+      "alias": "skotizo",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/a/a8/Skotizo.png?dc8b8"
+    },
+    {
+      "name": "The Gauntlet",
+      "alias": "gaunlet",
+      "killhr": 10,
+      "image": "https://oldschool.runescape.wiki/images/e/e4/Crystalline_Hunllef.png?7737a"
+    },
+    {
+      "name": "The Corrupted Gauntlet",
+      "alias": "corrupted gauntlet",
+      "killhr": 7.5,
+      "image": "https://oldschool.runescape.wiki/images/e/e4/Crystalline_Hunllef.png?7737a"
+    },
+    {
+      "name": "Theatre of Blood",
+      "alias": "tob",
+      "killhr": 3,
+      "image": "https://oldschool.runescape.wiki/images/7/74/Verzik_Vitur.png?28c0a"
+    },
+    {
+      "name": "Thermonuclear Smoke Devil",
+      "alias": "thermy",
+      "killhr": 110,
+      "image": "https://oldschool.runescape.wiki/images/1/1c/Thermonuclear_smoke_devil.png?87507"
+    },
+    {
+      "name": "TzKal-Zuk",
+      "alias": "zuk",
+      "killhr": 0.8,
+      "image": "https://oldschool.runescape.wiki/images/5/58/TzKal-Zuk.png?1f4e1"
+    },
+    {
+      "name": "TzTok-Jad",
+      "alias": "jad",
+      "killhr": 2,
+      "image": "https://oldschool.runescape.wiki/images/8/82/TzTok-Jad.png?87507"
+    },
+    {
+      "name": "Venenatis",
+      "alias": "venenatis",
+      "killhr": 44,
+      "image": "https://oldschool.runescape.wiki/images/7/7f/Venenatis.png?20540"
+    },
+    {
+      "name": "Vet'ion",
+      "alias": "vetion",
+      "killhr": 30,
+      "image": "https://oldschool.runescape.wiki/images/7/7f/Vet%27ion.png?4cb16"
+    },
+    {
+      "name": "Vorkath",
+      "alias": "vorkath",
+      "killhr": 30,
+      "image": "https://oldschool.runescape.wiki/images/9/9a/Vorkath.png?1ce3f"
+    },
+    {
+      "name": "Wintertodt",
+      "alias": "wt",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/7/78/Burning_brazier_%28Wintertodt%29.png?7b131"
+    },
+    {
+      "name": "Zalcano",
+      "alias": "zalcano",
+      "killhr": 0,
+      "image": "https://oldschool.runescape.wiki/images/3/30/Zalcano.png?6244d"
+    },
+    {
+      "name": "Zulrah",
+      "alias": "zulrah",
+      "killhr": 35,
+      "image": "https://oldschool.runescape.wiki/images/b/bc/Zulrah_%28serpentine%29.png?29a54"
+    }
+  ]
+}
