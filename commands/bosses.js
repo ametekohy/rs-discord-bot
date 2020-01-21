@@ -1,30 +1,20 @@
+const bossesView = require('../views/bossesView');
+
 module.exports = {
     name: 'bosses',
     description: 'Will views a list of all available bossesList',
     aliases: ['aliases'],
 
+    /**
+     * Returns the bosslist from the file and makes & send the view
+     * @param message - contains the discord message handler with the services
+     */
     displayBosses(message) {
         const {services} = message.client;
         const bossesService = services.get('bossesService');
         const bossList = bossesService.getBossesFromFile();
+        const view = bossesView.create(bossList);
 
-        let aliasString = '';
-        for (let boss of bossList) {
-            var amountOfSpaces = 18 - boss.alias.length;
-            var spaces = '';
-            for (let i = 0; i < amountOfSpaces; i++) {
-                spaces += '\xa0';
-            }
-            aliasString += '║ ' + boss.alias + spaces + ' ║\n';
-        }
-
-        message.channel.send('```\n'
-            + '╔════════════════════╗\n'
-            + '║ bossname aliases   ║\n'
-            + '╟────────────────────╢\n'
-            + aliasString
-            + '╚════════════════════╝'
-            + '```'
-            , {split: true});
+        message.channel.send(view);
     }
 };
