@@ -5,6 +5,11 @@ module.exports = {
     description: 'Will views a random image/gif/mp4 of dogs',
     aliases: ['doggo', 'doge'],
 
+    /**
+     * Fetch json file from https://random.dog and send the url to channel
+     * @param message - contains the discord message handler
+     * @returns {Promise<void>}
+     */
     async displayRandomDog(message) {
         try {
             const file = await fetch('https://random.dog/woof.json').then(body => body.json());
