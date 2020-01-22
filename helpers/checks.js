@@ -25,15 +25,15 @@ module.exports = {
         const bossesService = services.get('bossesService');
         const bossList = bossesService.getBossesFromFile();
 
-        var filterName = bossList.find(x => x.name && x.name === args[0]);
-        var filterAlias = bossList.find(x => x.alias && x.alias === args[0]);
+        const filterName = bossList.find(x => x.name && x.name === args);
+        const filterAlias = bossList.find(x => x.alias && x.alias === args);
 
         if(filterName !== undefined) {
             if (filterName.name === args.join(' ')) {
                 return filterName;
             }
         } else if(filterAlias !== undefined) {
-            if (filterAlias.alias === args[0]  ) {
+            if (filterAlias.alias === args) {
                 return filterAlias;
             }
         } else {

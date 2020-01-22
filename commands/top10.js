@@ -8,7 +8,8 @@ module.exports = {
     usage: '[validBossName]',
 
     displayTop10rankingOfBoss(message, args) {
-        const validBoss = checks.isValidBoss(message, args);
+        const checkedArgs = checks.arguments(args);
+        const validBoss = checks.isValidBoss(message, checkedArgs.officalName);
 
         if(!validBoss) {
             message.channel.send(args + ' is not a valid boss!');
