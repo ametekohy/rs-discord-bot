@@ -4,7 +4,7 @@ const bot = new  Discord.Client();
 const fs = require('fs');
 
 // includes (internal)
-const config = require('./resources/config.js');
+const config = require('./resources/config');
 
 // set all commands from the command folder
 bot.commands = new Discord.Collection();
@@ -14,11 +14,11 @@ for(const file of commandFiles) {
     bot.commands.set(command.name, command);
 }
 
-// set all models from the models folder
+// set all services from the services folder
 bot.services = new Discord.Collection();
-const servicesFiles = fs.readdirSync('./models/').filter(file => file.endsWith('.js'));
+const servicesFiles = fs.readdirSync('./services/').filter(file => file.endsWith('.js'));
 for(const file of servicesFiles) {
-    const service = require(`./models/${file}`);
+    const service = require(`./services/${file}`);
     bot.services.set(service.name, new service);
 }
 
