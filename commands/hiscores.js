@@ -22,13 +22,18 @@ module.exports = {
             const scoresService = services.get('scoresService');
             const scores = scoresService.getScoresOfMember(checkedArgs.officalName);
 
-            let hiscoresList = [];
-            bosses.forEach(function (item, index) {
-                hiscoresList.push({"bossname": item.name, "score": scores[index]});
-            });
-
+            let hiscoresList = this.joinScoresWithBosses(bosses,scores);
             const embed = hiscoresView.createEmbed(checkedArgs.officalName, hiscoresList);
+
             await message.channel.send(embed);
         }
+    },
+
+    joinScoresWithBosses(bosses, scores) {
+        let hiscoresList = [];
+        bosses.forEach(function (item, index) {
+            hiscoresList.push({"bossname": item.name, "score": scores[index]});
+        });
+        return hiscoresList;
     }
 };
