@@ -1,6 +1,6 @@
 //Includes (Internal)
-const embeds = require('../views/embeds');
 const checks = require('../helpers/checks');
+const hiscoresView = require('../views/hiscoresView');
 
 module.exports = {
     name: 'hiscores',
@@ -27,8 +27,8 @@ module.exports = {
                 hiscoresList.push({"bossname": item.name, "score": scores[index]});
             });
 
-            const embed = embeds.createplayerhiscore(checkedArgs.officalName, hiscoresList);
-            message.channel.send(embed);
+            const embed = hiscoresView.createEmbed(checkedArgs.officalName, hiscoresList);
+            await message.channel.send(embed);
         }
     }
 };

@@ -1,6 +1,6 @@
 //Includes (Internal)
 const checks = require('../helpers/checks');
-const embeds = require('../views/embeds');
+const top10view = require('../views/top10View');
 
 module.exports = {
     name: 'top10',
@@ -15,7 +15,7 @@ module.exports = {
             message.channel.send(args + ' is not a valid boss!');
         } else {
             const list = this.getTop10rankingOfBoss(message, validBoss.name);
-            const embed = embeds.createtop10(validBoss.name, validBoss.image, list);
+            const embed = top10view.createEmbed(validBoss.name, validBoss.image, list);
             message.channel.send(embed);
         }
     },
@@ -27,7 +27,7 @@ module.exports = {
         const members = membersService.getMembersFromFile();
 
         const bossesService = services.get('bossesService');
-        const bossIndex = bossesService.getBossIndexFromFile(bossName)
+        const bossIndex = bossesService.getBossIndexFromFile(bossName);
 
         const scoresService = services.get('scoresService');
         const scoresList = scoresService.getScoresOfBoss(bossIndex);
