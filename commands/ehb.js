@@ -20,7 +20,7 @@ module.exports = {
     async getEHB(message, checkedArgs) {
         const { services } = message.client;
         const bossesService = services.get('bossesService');
-        const bossList = bossesService.getBossesFromFile();
+        const bossList = bossesService.getBossesList();
 
         const scoresService = services.get('scoresService');
         var killcountList = await scoresService.getScoresOfMember(checkedArgs);

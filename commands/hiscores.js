@@ -17,7 +17,7 @@ module.exports = {
         } else {
             const {services} = message.client;
             const bossesService = services.get('bossesService');
-            const bosses = bossesService.getBossesFromFile();
+            const bosses = bossesService.getBossesList();
 
             const scoresService = services.get('scoresService');
             const scores = scoresService.getScoresOfMember(checkedArgs.officalName);

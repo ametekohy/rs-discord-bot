@@ -7,7 +7,7 @@ module.exports = {
         try {
             const {services} = message.client;
             const membersService = services.get('membersService');
-            message.channel.send(membersService.getMembersFromFile());
+            message.channel.send(membersService.getMembersList());
         } catch (error) {
             message.channel.send('Couldn\'t get membersList from file. ' + error);
         }

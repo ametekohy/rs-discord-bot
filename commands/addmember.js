@@ -26,7 +26,7 @@ module.exports = {
                     const {services} = message.client;
                     const membersService = services.get('membersService');
 
-                    membersService.addMember(checkedArgs.officalName, validUser);
+                    membersService.addMember(validUser);
                     message.channel.send('The member "' + checkedArgs.officalName + '" has been added to the memberslist!');
                 } catch (error) {
                     message.channel.send('Couldn\'t add member. ' + error);

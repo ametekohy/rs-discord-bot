@@ -24,10 +24,10 @@ module.exports = {
         // Loop membersList. Grab score of args boss put list. Sort high low. Display.
         const {services} = message.client;
         const membersService = services.get('membersService');
-        const members = membersService.getMembersFromFile();
+        const members = membersService.getMembersList();
 
         const bossesService = services.get('bossesService');
-        const bossIndex = bossesService.getBossIndexFromFile(bossName);
+        const bossIndex = bossesService.getBossIndex(bossName);
 
         const scoresService = services.get('scoresService');
         const scoresList = scoresService.getScoresOfBoss(bossIndex);
