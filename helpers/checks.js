@@ -28,6 +28,8 @@ module.exports = {
         const filterName = bossList.find(x => x.name && x.name === args);
         const filterAlias = bossList.find(x => x.alias && x.alias === args);
 
+        const suggestion = bossList.find(x => x.name.includes(args) || x.alias.includes(args));
+
         if(filterName !== undefined) {
             if (filterName.name === args.join(' ')) {
                 return filterName;
@@ -36,6 +38,9 @@ module.exports = {
             if (filterAlias.alias === args) {
                 return filterAlias;
             }
+        } else if(suggestion !== undefined) {
+            message.channel.send('Do you mean: ' + suggestion.name + ' (' + suggestion.alias + ')?');
+            return false;
         } else {
             return false;
         }
