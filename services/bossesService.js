@@ -5,15 +5,19 @@ module.exports = class bossesService {
     bossesList;
 
     constructor() {
+        this.getBossesFromFile();
+    }
+
+    getBossesFromFile() {
         const dataFromFile = fs.readFileSync('./data/bosses.json');
         this.bossesList = JSON.parse(dataFromFile).bosses;
     }
 
-    getBossesFromFile() {
+    getBossesList() {
         return this.bossesList;
     }
 
-    getBossIndexFromFile(bossName) {
+    getBossIndex(bossName) {
         return this.bossesList.findIndex(x => x.name === bossName);
     }
 };

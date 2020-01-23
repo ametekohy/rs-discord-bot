@@ -2,7 +2,7 @@ module.exports = {
     isMember(message, args) {
         const { services } = message.client;
         const membersService = services.get('membersService');
-        const members = membersService.getMembersFromFile();
+        const members = membersService.getMembersList();
 
         const filterName = members.find(x => x === args);
         return !!filterName;
@@ -23,7 +23,7 @@ module.exports = {
     isValidBoss(message, args) {
         const { services } = message.client;
         const bossesService = services.get('bossesService');
-        const bossList = bossesService.getBossesFromFile();
+        const bossList = bossesService.getBossesList();
 
         const filterName = bossList.find(x => x.name && x.name === args);
         const filterAlias = bossList.find(x => x.alias && x.alias === args);

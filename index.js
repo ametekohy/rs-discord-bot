@@ -26,7 +26,7 @@ for(const file of servicesFiles) {
 bot.on('ready', () => {
     let test = bot.services.get('scoresService');
     const membersService = bot.services.get('membersService');
-    const members = membersService.getMembersFromFile();
+    const members = membersService.getMembersList();
     test.fetchScores(members);
     console.log('This bot is online!');
 });

@@ -12,7 +12,7 @@ module.exports = {
     displayBosses(message) {
         const {services} = message.client;
         const bossesService = services.get('bossesService');
-        const bossList = bossesService.getBossesFromFile();
+        const bossList = bossesService.getBossesList();
         const view = bossesView.create(bossList);
 
         message.channel.send(view);
