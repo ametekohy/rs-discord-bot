@@ -4,8 +4,13 @@ module.exports = {
         const membersService = services.get('membersService');
         const members = membersService.getMembersList();
 
-        const filterName = members.find(x => x === args);
-        return !!filterName;
+        const filterName = members.find(x => x.toLowerCase() === args.toLowerCase());
+
+        if(filterName !== undefined) {
+            return filterName;
+        } else {
+            return false;
+        }
     },
 
     async isValidUser(message, args) {
@@ -25,15 +30,15 @@ module.exports = {
         const bossesService = services.get('bossesService');
         const bossList = bossesService.getBossesList();
 
-        const filterName = bossList.find(x => x.name && x.name === args);
-        const filterAlias = bossList.find(x => x.alias && x.alias === args);
+        const filterName = bossList.find(x => x.name && x.name.toLowerCase() === args.toLowerCase());
+        const filterAlias = bossList.find(x => x.alias && x.alias.toLowerCase() === args.toLowerCase());
 
-        const suggestion = bossList.find(x => x.name.includes(args) || x.alias.includes(args));
+        const suggestion = bossList.find(x => x.name.includes(args.toLowerCase()) || x.alias.includes(args.toLocaleString()));
 
         if(filterName !== undefined) {
-            if (filterName.name === args.join(' ')) {
+            // if (filterName.name === args.join(' ')) {
                 return filterName;
-            }
+            // }
         } else if(filterAlias !== undefined) {
             if (filterAlias.alias === args) {
                 return filterAlias;

@@ -20,10 +20,10 @@ module.exports = {
             const bosses = bossesService.getBossesList();
 
             const scoresService = services.get('scoresService');
-            const scores = scoresService.getScoresOfMember(checkedArgs.officalName);
+            const scores = scoresService.getScoresOfMember(validUser);
 
             let hiscoresList = this.joinScoresWithBosses(bosses,scores);
-            const embed = hiscoresView.createEmbed(checkedArgs.officalName, hiscoresList);
+            const embed = hiscoresView.createEmbed(validUser, hiscoresList);
 
             await message.channel.send(embed);
         }

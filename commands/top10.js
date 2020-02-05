@@ -12,7 +12,7 @@ module.exports = {
         const validBoss = checks.isValidBoss(message, checkedArgs.officalName);
 
         if(!validBoss) {
-            message.channel.send('"' + args + '"' + ' is not a valid boss!');
+            message.channel.send('"' + checkedArgs.officalName + '"' + ' is not a valid boss!');
         } else {
             const list = this.getTop10rankingOfBoss(message, validBoss.name);
             const embed = top10view.createEmbed(validBoss.name, validBoss.image, list);
