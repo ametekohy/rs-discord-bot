@@ -6,15 +6,20 @@ module.exports = {
 
     async displayEHB(message, args) {
         var checkedArgs = checks.arguments(args);
+        const validUser = await checks.isMember(message, checkedArgs.officalName);
 
-        var ehbList = await this.getEHB(message, checkedArgs.fetchArg);
+        if(!validUser) {
+            message.channel.send('The name "' + checkedArgs.officalName + '" is not in the memberslist!');
+        } else {
+            var ehbList = await this.getEHB(message, validUser);
 
-        var endresult = 0.00;
-        for(var ehb of ehbList) {
-            endresult += +ehb;
+            var endresult = 0.00;
+            for (var ehb of ehbList) {
+                endresult += +ehb;
+            }
+
+            message.channel.send('Total EHB of ' + validUser + ' is ' + endresult.toFixed(2));
         }
-
-        message.channel.send('TOTAL EHB: ' + endresult);
     },
 
     async getEHB(message, checkedArgs) {
