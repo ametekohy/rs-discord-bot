@@ -260,14 +260,3 @@
     }
   ]
 }
-
-
-/* Wanneer Jagex de website update: Onder Mimic boss plaatsen.
-https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=Kitsch (100 kc)
-    {
-      "name": "Nightmare",
-      "alias": "nightmare",
-      "killhr": 10,
-      "image": "https://oldschool.runescape.wiki/images/7/7d/The_Nightmare.png?a7a67"
-    },
-*/
