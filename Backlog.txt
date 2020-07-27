@@ -1,7 +1,11 @@
+INFO: 
+Embed length - Title: 256 Characters
+             - Description: 2048 Characters
+             - Fields: max 25.
+
 TO DO:
 -Command to change name in memberslist
 -Remove member(s) from memberslist.txt
--EBH calculator
 -Look into reading google docs via google docs API (https://developers.google.com/docs/api/quickstart/nodejs)
 
 ISSUES:
@@ -12,4 +16,30 @@ SUGGESTIONS:
 -Change roles for members based on killcount (raids kc channel) & send message in admin channel to update the moderators.
 -link discord userid to runscape name. (what if multiple accounts?)
 
-fdshgkjhsd
+COMMANDS:
+Addmember:      -
+                -  
+                -
+Bosses:         -
+                -
+                -
+Dog:    COMPLETE
+EHB:            -
+                -
+                -
+Help    COMPLETE
+Hiscores        -
+                -
+                -
+Members:        -
+                -
+                -
+Removemember:   -
+                -                                    
+                -
+Roles:          -
+                -
+                -
+top10:          -
+                -
+                -                
