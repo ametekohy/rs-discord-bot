@@ -17,6 +17,10 @@ module.exports = class membersService {
         return this.membersList;
     }
 
+    getAmountOfMembers() {
+        return this.membersList.length;
+    }
+
     getMemberIndex(memberName) {
         return this.membersList.findIndex(x => x === memberName);
     }
@@ -30,6 +34,7 @@ module.exports = class membersService {
         this.membersList.push(member.name);
         fs.writeFileSync('./data/membersList.txt', this.membersList);
 
+        // ???????????????????????????????????????????????????????
         // add to scores
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
