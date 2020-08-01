@@ -6,15 +6,20 @@ module.exports = {
     aliases: ['aliases'],
 
     /**
-     * Returns the bosslist from the file and makes & send the view
+     * Returns the bosses from the json-file and setup a display and send the view to channel
      * @param message - contains the discord message handler with the services
      */
     displayBosses(message) {
+        // get data from services
         const {services} = message.client;
         const bossesService = services.get('bossesService');
         const bossList = bossesService.getBossesList();
-        const view = bossesView.create(bossList);
+        const lastUpdatedDate = bossesService.getLastUpdatedDate();
 
-        message.channel.send(view);
+        // create display
+        const displayBosses = bossesView.create(bossList, lastUpdatedDate);
+
+        // send display to discord
+        message.channel.send(displayBosses);
     }
 };

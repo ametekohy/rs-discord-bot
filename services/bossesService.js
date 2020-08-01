@@ -2,6 +2,7 @@
 const fs = require('fs');
 
 module.exports = class bossesService {
+    lastUpdatedDate;
     bossesList;
 
     constructor() {
@@ -11,6 +12,7 @@ module.exports = class bossesService {
     getBossesFromFile() {
         const dataFromFile = fs.readFileSync('./data/bosses.json');
         this.bossesList = JSON.parse(dataFromFile).bosses;
+        this.lastUpdatedDate = JSON.parse(dataFromFile).lastupdateddate;
     }
 
     getBossesList() {
@@ -19,5 +21,9 @@ module.exports = class bossesService {
 
     getBossIndex(bossName) {
         return this.bossesList.findIndex(x => x.name === bossName);
+    }
+
+    getLastUpdatedDate() {
+        return this.lastUpdatedDate;
     }
 };

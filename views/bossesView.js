@@ -1,5 +1,5 @@
 module.exports = {
-    create: function(bossList) {
+    create: function(bossList, lastupdateddate) {
         let aliasString = '';
         for (let boss of bossList) {
             const amountOfSpaces = 18 - boss.alias.length;
@@ -13,10 +13,11 @@ module.exports = {
 
        return '```'
             + '╔════════════════════╗\n'
-            + '║ bossname aliases   ║\n'
+            + '║ Aliases of bosses  ║\n'
             + '╟────────────────────╢\n'
             +       aliasString
-            + '╚════════════════════╝'
+            + '╚════════════════════╝\n'
+            + 'last updated: ' + lastupdateddate
             + '```'
             ;
     }
