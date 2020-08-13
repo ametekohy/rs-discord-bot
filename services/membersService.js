@@ -9,8 +9,8 @@ module.exports = class membersService {
     }
 
     getMembersFromFile() {
-        const dataFromFile = fs.readFileSync('./data/membersList.txt', 'utf8');
-        this.membersList = dataFromFile.split(',');
+        const dataFromFile = fs.readFileSync('./data/members.json');
+        this.membersList = JSON.parse(dataFromFile).members;
     }
 
     getMembersList() {
@@ -31,36 +31,18 @@ module.exports = class membersService {
 
     addMember(member) {
         // add to membersList
-        this.membersList.push(member.name);
-        fs.writeFileSync('./data/membersList.txt', this.membersList);
+        this.membersList.push(member);
 
-        // ???????????????????????????????????????????????????????
-        // add to scores
-        const dataFromFile = fs.readFileSync('./data/scores.json');
-        let scores = JSON.parse(dataFromFile);
-        scores.push(member);
-
-        let data = JSON.stringify(scores, null, 2);
-        fs.writeFile('./data/scores.json', data, (err) => {
-            if (err) throw err;
-        });
+        // save to members.json
+        let newList = {members: this.membersList};
+        fs.writeFileSync('./data/members.json', JSON.stringify(newList));
     }
 
     removeMember(member) {
         // remove from membersList
         const index = this.getMemberIndex(member.name);
         this.membersList.splice(index, 1);
-        fs.writeFileSync('./data/membersList.txt', this.membersList);
-
-        // remove from scores
-        const dataFromFile = fs.readFileSync('./data/scores.json');
-        let scores = JSON.parse(dataFromFile);
-        const memberIndex = scores.findIndex(x => x.name === member.name);
-        if (memberIndex !== undefined) scores.splice(memberIndex, 1);
-
-        let data = JSON.stringify(scores, null, 2);
-        fs.writeFile('./data/scores.json', data, (err) => {
-            if (err) throw err;
-        });
+        // save to members.json
+        fs.writeFileSync('./data/members.json', this.membersList);
     }
 };

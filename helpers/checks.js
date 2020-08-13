@@ -1,5 +1,5 @@
 module.exports = {
-    isMember(message, args) {
+    isAlreadyMember(message, args) {
         const { services } = message.client;
         const membersService = services.get('membersService');
         const members = membersService.getMembersList();

@@ -55,6 +55,37 @@ module.exports = class scoresService {
         return scoresOfMember[0].score;
     }
 
+    async addScoresOfMember(memberScores) {
+        const dataFromFile = fs.readFileSync('./data/scores.json');
+        let scores = JSON.parse(dataFromFile);
+
+        scores.push(memberScores);
+
+        let data = JSON.stringify(scores, null, 2);
+
+        fs.writeFile('./data/scores.json', data, (err) => {
+            if (err) throw err;
+            console.log('added member scores to file');
+        });
+    }
+
+    removeScoresOfMember(member) {
+        const dataFromFile = fs.readFileSync('./data/scores.json');
+        let scores = JSON.parse(dataFromFile);
+
+        let scoresOfMember = scores.filter(x => x.name.includes(member));
+        console.log(scoresOfMember);
+        delete scores[scoresOfMember];
+
+        let data = JSON.stringify(scores, null, 2);
+
+        fs.writeFile('./data/scores.json', data, (err) => {
+            if (err) throw err;
+            console.log('test');
+        });
+    }
+
+    // doubt function name
     getScoresOfBoss(bossIndex) {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);

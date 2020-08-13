@@ -17,17 +17,24 @@ module.exports = {
      */
     async displayAddMember(message, args) {
         const checkedArgs = checks.arguments(args);
-        const isMember = checks.isMember(message, checkedArgs.officalName);
+        const isAlreadyMember = checks.isAlreadyMember(message, checkedArgs.officalName);
         const validUser = await checks.isValidUser(message, checkedArgs.fetchArg);
 
-        if (!isMember) {
+        if (!isAlreadyMember) {
             if (validUser) {
                 try {
                     const {services} = message.client;
                     const membersService = services.get('membersService');
 
-                    membersService.addMember(checkedargs.officalName);
+                    membersService.addMember(checkedArgs.officalName);
                     message.channel.send('The member "' + checkedArgs.officalName + '" has been added to the memberslist!');
+
+                    // add the scores of new member to scoreslist
+                    const scoresService = services.get('scoresService');
+                    const scores = await scoresService.fetchScoresOfMember(checkedArgs.fetchArg);
+                    scores.name = checkedArgs.officalName;
+                    await scoresService.addScoresOfMember(scores);
+                    message.channel.send('The scores of member "' + checkedArgs.officalName + '" has been added to the scoreslist!');
                 } catch (error) {
                     message.channel.send('Couldn\'t add member. ' + error);
                 }
