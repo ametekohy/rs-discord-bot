@@ -24,11 +24,12 @@ for(const file of servicesFiles) {
 
 // ready status when bot goes online
 bot.on('ready', () => {
-    let test = bot.services.get('scoresService');
+    let services = bot.services.get('scoresService');
     const membersService = bot.services.get('membersService');
     const members = membersService.getMembersList();
-    test.fetchScores(members);
-    console.log('This bot is online!');
+    services.fetchScores(members).then(r =>
+        console.log('This bot is online!')
+    );
 });
 
 // handle incoming messages
@@ -41,46 +42,51 @@ bot.on('message', async message => {
     const command = bot.commands.get(commandName)
         || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-    switch (command.name) {
-        case 'help':
-            command.displayCommands(message, args);
-            break;
-        case 'hiscores':
-            command.displayScores(message, args);
-            break;
-        case 'top10':
-            command.displayTop10rankingOfBoss(message, args);
-            break;
-        case 'bosses':
-            command.displayBosses(message);
-            break;
-        case 'members':
-            command.displayMembers(message);
-            break;
-        case 'addmember':
-            if(checkroleisstaff(message)) {
-                command.displayAddMember(message, args);
-            } else {
-                message.channel.send('You are not part of the Staff.')
-            }
-            break;
-        case 'removemember':
-            if(checkroleisstaff(message)) {
-                command.displayRemoveMember(message, args);
-            } else {
-                message.channel.send('You are not part of the Staff.')
-            }
-            break;
-        case 'dog':
-            command.displayRandomDog(message);
-            break;
-        case 'ehb':
-            command.displayEHB(message, args);
-            break;
-        // case 'role':
-        //     command.assignrole(message, args);
-        //     break;
+    try {
+        switch (command.name) {
+            case 'help':
+                command.displayCommands(message, args);
+                break;
+            case 'hiscores':
+                command.displayScores(message, args);
+                break;
+            case 'top10':
+                command.displayTop10rankingOfBoss(message, args);
+                break;
+            case 'bosses':
+                command.displayBosses(message);
+                break;
+            case 'members':
+                command.displayMembers(message);
+                break;
+            case 'addmember':
+                if(checkroleisstaff(message)) {
+                    command.displayAddMember(message, args);
+                } else {
+                    message.channel.send('You are not part of the Staff.')
+                }
+                break;
+            case 'removemember':
+                if(checkroleisstaff(message)) {
+                    command.displayRemoveMember(message, args);
+                } else {
+                    message.channel.send('You are not part of the Staff.')
+                }
+                break;
+            case 'dog':
+                command.displayRandomDog(message);
+                break;
+            case 'ehb':
+                command.displayEHB(message, args);
+                break;
+            // case 'role':
+            //     command.assignrole(message, args);
+            //     break;
+        }
+    }catch (e) {
+        await message.channel.send('Invalid command given. Try !help to see available commands.', e);
     }
+
 });
 
 //Execute on discord

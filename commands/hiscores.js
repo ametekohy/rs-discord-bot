@@ -10,11 +10,9 @@ module.exports = {
 
     async displayScores(message, args) {
         const checkedArgs = checks.arguments(args);
-        const validUser = await checks.isMember(message, checkedArgs.officalName);
+        const validUser = await checks.isAlreadyMember(message, checkedArgs.officalName);
 
-        if(!validUser) {
-            message.channel.send('The name "' + checkedArgs.officalName + '" is not in the memberslist!');
-        } else {
+        if(validUser) {
             const {services} = message.client;
             const bossesService = services.get('bossesService');
             const bosses = bossesService.getBossesList();
@@ -26,6 +24,8 @@ module.exports = {
             const embed = hiscoresView.createEmbed(validUser, hiscoresList);
 
             await message.channel.send(embed);
+        } else {
+            message.channel.send('The name "' + checkedArgs.officalName + '" is not in the memberslist!');
         }
     },
 

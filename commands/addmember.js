@@ -4,7 +4,7 @@ const checks = require('../helpers/checks');
 module.exports = {
     name: 'addmember',
     description: 'Adds a valid osrs member to the memberslist',
-    aliases: ['addm'],
+    aliases: ['add'],
 
     /**
      * The display for the AddMember command.

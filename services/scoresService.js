@@ -14,7 +14,7 @@ module.exports = class scoresService {
 
         fs.writeFile('./data/scores.json', data, (err) => {
             if (err) throw err;
-            console.log('Members scores written to file');
+            console.log('Scores of members written to file');
         });
     }
 
@@ -28,7 +28,7 @@ module.exports = class scoresService {
         if (results !== undefined) {
             // split by enters and remove first 35 items
             results = results.split("\n").slice(35);
-
+            console.log(results);
             let scoresArr = [];
             for (let result of results) {
                 // split remaining results, remove rank and push the score
@@ -43,6 +43,7 @@ module.exports = class scoresService {
 
             scoresOfMember= {name: member, score: scoresArr};
         }
+
 
         return scoresOfMember;
     }
@@ -73,15 +74,12 @@ module.exports = class scoresService {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
 
-        let scoresOfMember = scores.filter(x => x.name.includes(member));
-        console.log(scoresOfMember);
-        delete scores[scoresOfMember];
-
-        let data = JSON.stringify(scores, null, 2);
+        let scoresOfMember = scores.filter(x => !x.name.includes(member));
+        let data = JSON.stringify(scoresOfMember, null, 2);
 
         fs.writeFile('./data/scores.json', data, (err) => {
             if (err) throw err;
-            console.log('test');
+            console.log('Scores removed from: ' + member);
         });
     }
 

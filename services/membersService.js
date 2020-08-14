@@ -25,24 +25,25 @@ module.exports = class membersService {
         return this.membersList.findIndex(x => x === memberName);
     }
 
-    getMember(index) {
-        return this.membersList[index];
-    }
-
     addMember(member) {
         // add to membersList
         this.membersList.push(member);
 
         // save to members.json
-        let newList = {members: this.membersList};
-        fs.writeFileSync('./data/members.json', JSON.stringify(newList));
+        this.saveMemberList();
     }
 
     removeMember(member) {
         // remove from membersList
         const index = this.getMemberIndex(member.name);
         this.membersList.splice(index, 1);
+
         // save to members.json
-        fs.writeFileSync('./data/members.json', this.membersList);
+        this.saveMemberList();
+    }
+
+    saveMemberList() {
+        let newList = {members: this.membersList};
+        fs.writeFileSync('./data/members.json', JSON.stringify(newList));
     }
 };
