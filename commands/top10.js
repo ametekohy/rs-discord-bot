@@ -4,9 +4,16 @@ const top10view = require('../views/top10View');
 
 module.exports = {
     name: 'top10',
-    description: 'Will views the top 10 highest killcounts for the provided boss',
+    description: 'Will calculate and display the top 10 highest killcounts of members for the provided boss.',
     usage: '[validBossName]',
 
+    /**
+     * The display for the Top10 command.
+     * Will calculate and display the top 10 highest killcounts of members for the provided boss
+     *
+     * @param message - contains the discord message handler
+     * @param args - the given boss name
+     */
     displayTop10rankingOfBoss(message, args) {
         const checkedArgs = checks.arguments(args);
         const validBoss = checks.isValidBoss(message, checkedArgs.officalName);

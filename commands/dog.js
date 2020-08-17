@@ -2,11 +2,13 @@ const fetch = require('node-fetch');
 
 module.exports = {
     name: 'dog',
-    description: 'Will views a random image/gif/mp4 of dogs',
+    description: 'Will display a random image/gif/mp4 of dogs.',
     aliases: ['doggo', 'doge'],
 
     /**
-     * Fetch json file from https://random.dog and send the url to channel
+     * The display for the Dog command.
+     * Fetch json file from https://random.dog and send the url to channel.
+     *
      * @param message - contains the discord message handler
      * @returns {Promise<void>}
      */

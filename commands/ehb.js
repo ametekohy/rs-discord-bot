@@ -2,8 +2,17 @@ const checks = require('../helpers/checks');
 
 module.exports = {
     name: 'ehb',
-    description: 'Calculate EHB of member',
+    description: 'Will calculate and display the EHB of the given member.',
+    usage: '[validUserName]',
 
+    /**
+     * The display for the EHB command.
+     * Will calculate and display the EHB of a valid user in the memberslist.
+     *
+     * @param message - contains the discord message handler
+     * @param args - the given member's name
+     * @returns {Promise<void>}
+     */
     async displayEHB(message, args) {
         const checkedArgs = checks.arguments(args);
         const validUser = await checks.isAlreadyMember(message, checkedArgs.officalName);

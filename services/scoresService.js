@@ -28,7 +28,7 @@ module.exports = class scoresService {
         if (results !== undefined) {
             // split by enters and remove first 35 items
             results = results.split("\n").slice(35);
-            console.log(results);
+
             let scoresArr = [];
             for (let result of results) {
                 // split remaining results, remove rank and push the score

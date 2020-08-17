@@ -4,10 +4,18 @@ const hiscoresView = require('../views/hiscoresView');
 
 module.exports = {
     name: 'hiscores',
-    description: 'Will views the killcount for each boss for the provided username',
+    description: 'Will display the highscores/killcount for each boss for the provided member.',
     aliases: ['hs'],
     usage: '[validUserName]',
 
+    /**
+     * The display for the Hiscores command.
+     * Will calculate and display the hiscores of the given valid member in the memberslist.
+     *
+     * @param message - contains the discord message handler
+     * @param args - the given member's name
+     * @returns {Promise<void>}
+     */
     async displayScores(message, args) {
         const checkedArgs = checks.arguments(args);
         const validUser = await checks.isAlreadyMember(message, checkedArgs.officalName);

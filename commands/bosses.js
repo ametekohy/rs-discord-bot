@@ -2,11 +2,13 @@ const bossesView = require('../views/bossesView');
 
 module.exports = {
     name: 'bosses',
-    description: 'Will views a list of all available bossesList',
+    description: 'Will display a list of all available bosses.',
     aliases: ['aliases'],
 
     /**
-     * Returns the bosses from the json-file and setup a display and send the view to channel
+     * The display for the Bosses command.
+     * Returns the bosses from bosses.json. It setup a display and send the view to channel.
+     *
      * @param message - contains the discord message handler with the services
      */
     displayBosses(message) {

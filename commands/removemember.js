@@ -3,9 +3,18 @@ const checks = require('../helpers/checks');
 
 module.exports = {
     name: 'removemember',
-    description: '-',
+    description: 'Will remove the given member and his scores from the memberslist.',
     aliases: ['remove'],
+    usage: '[validUserName]',
 
+    /**
+     * The display for the RemoveMember command.
+     * Will verify and remove the given member and their scores from the memberslist.
+     *
+     * @param message - contains the discord message handler
+     * @param args - the given member's name
+     * @returns {Promise<void>}
+     */
     async displayRemoveMember(message, args) {
         const checkedArgs = checks.arguments(args);
         const isAlreadyMember = checks.isAlreadyMember(message, checkedArgs.officalName);
