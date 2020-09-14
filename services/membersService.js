@@ -35,7 +35,7 @@ module.exports = class membersService {
 
     removeMember(member) {
         // remove from membersList
-        const index = this.getMemberIndex(member.name);
+        const index = this.getMemberIndex(member);
         this.membersList.splice(index, 1);
 
         // save to members.json

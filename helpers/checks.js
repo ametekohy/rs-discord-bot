@@ -16,9 +16,9 @@ module.exports = {
     async isValidUser(message, args) {
         const { services } = message.client;
         const scoresService = services.get('scoresService');
-        let result = scoresService.fetchScoresOfMember(args);
+        let result = await scoresService.fetchScoresOfMember(args);
 
-        if(result === undefined || result === null) {
+        if(result === undefined || result === null || result.score === undefined || result.score.length === 0) {
             return false;
         } else {
             return result;

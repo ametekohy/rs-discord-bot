@@ -48,7 +48,7 @@ bot.on('message', async message => {
                 command.displayCommands(message, args);
                 break;
             case 'hiscores':
-                command.displayScores(message, args);
+                await command.displayScores(message, args);
                 break;
             case 'top10':
                 command.displayTop10rankingOfBoss(message, args);
@@ -61,30 +61,34 @@ bot.on('message', async message => {
                 break;
             case 'addmember':
                 if(checkroleisstaff(message)) {
-                    command.displayAddMember(message, args);
+                    await command.displayAddMember(message, args);
                 } else {
-                    message.channel.send('You are not part of the Staff.')
+                    await message.channel.send('You are not part of the Staff.')
+                }
+                break;
+            case 'changemember':
+                if(checkroleisstaff(message)) {
+                    await command.displayChangeMember(message, args);
+                } else {
+                    await message.channel.send('You are not part of the Staff.')
                 }
                 break;
             case 'removemember':
                 if(checkroleisstaff(message)) {
-                    command.displayRemoveMember(message, args);
+                    await command.displayRemoveMember(message, args);
                 } else {
-                    message.channel.send('You are not part of the Staff.')
+                    await message.channel.send('You are not part of the Staff.')
                 }
                 break;
             case 'dog':
-                command.displayRandomDog(message);
+                await command.displayRandomDog(message);
                 break;
             case 'ehb':
-                command.displayEHB(message, args);
+                await command.displayEHB(message, args);
                 break;
-            // case 'role':
-            //     command.assignrole(message, args);
-            //     break;
         }
     }catch (e) {
-        await message.channel.send('Invalid command given. Try !help to see available commands.', e);
+        await message.channel.send('Invalid command given. Try !help to see available commands. ' + e, e);
     }
 
 });

@@ -52,7 +52,7 @@ module.exports = class scoresService {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
 
-        let scoresOfMember = scores.filter(x => x.name.includes(member));
+        let scoresOfMember = scores.filter(x => x.name === member);
         return scoresOfMember[0].score;
     }
 
@@ -74,8 +74,10 @@ module.exports = class scoresService {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
 
-        let scoresOfMember = scores.filter(x => !x.name.includes(member));
-        let data = JSON.stringify(scoresOfMember, null, 2);
+        const index = scores.findIndex(x => x.name === member);
+        scores.splice(index,1);
+
+        let data = JSON.stringify(scores, null, 2);
 
         fs.writeFile('./data/scores.json', data, (err) => {
             if (err) throw err;

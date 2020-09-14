@@ -23,7 +23,7 @@ module.exports = {
         const isAlreadyMember = checks.isAlreadyMember(message, checkedArgs.officalName);
         const validUser = await checks.isValidUser(message, checkedArgs.fetchArg);
 
-        if (!isAlreadyMember) {
+        if (isAlreadyMember === false) {
             if (validUser) {
                 try {
                     const {services} = message.client;

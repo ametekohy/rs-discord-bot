@@ -20,7 +20,7 @@ module.exports = {
         const checkedArgs = checks.arguments(args);
         const validUser = await checks.isAlreadyMember(message, checkedArgs.officalName);
 
-        if(validUser) {
+        if(validUser !== false) {
             const {services} = message.client;
             const bossesService = services.get('bossesService');
             const bosses = bossesService.getBossesList();
