@@ -1,9 +1,10 @@
 // Includes (Internal)
 const checks = require('../helpers/checks');
+const fs = require('fs');
 
 module.exports = {
     name: 'changemember',
-    description: 'change ',
+    description: 'Change old rsn to new rsn. Syntax: !change oldname-newname',
     aliases: ['change'],
 
     /**
@@ -13,34 +14,40 @@ module.exports = {
      * @returns {Promise<void>}
      */
     displayChangeMember(message, args) {
-        var myRegexp = /[^\s"]+|"([^"]*)"/gi;
-        var myString = "" + args;
-        var myArray = [];
-
-        do {
-            //Each call to exec returns the next regex match as an array
-            var match = myRegexp.exec(myString);
-            if (match != null)
-            {
-                //Index 1 in the array is the captured group if it exists
-                //Index 0 is the matched text, which we use if no captured group exists
-                myArray.push(match[1] ? match[1] : match[0]);
+        //concatenate both arguments into 1 string
+        let argument = ""
+        for (i=0; i<args.length; i++) {
+            argument += args[i] + " " 
+        }
+        //Remove last " " at the end of the string
+        argument = argument.substring(0, argument.length - 1)
+        //Cut "-" from the args, make 2 args
+        let splitnames = argument.split("-")
+        let oldname = splitnames[0]
+        let newname = splitnames[1]
+        //Check if old name is part of memberslist.txt
+        if (checks.isAlreadyMember(message, oldname)) {
+        //Check new name is valid on osrs hiscores webpage
+            if (checks.isValidUser(message, newname)) {
+                //Open JSON file
+                const dataFromFile = fs.readFileSync('./data/members.json');
+                let memberslist = JSON.parse(dataFromFile);
+                //Find index for old name
+                let index = memberslist.members.findIndex(x => x === oldname)
+                memberslist.members[index] = newname
+                //Save new name in JSON file
+                fs.writeFileSync('./data/members.json', JSON.stringify(memberslist));
+                //Update memberslist
+                const {services} = message.client;
+                const membersService = services.get('membersService');
+                membersService.getMembersFromFile();
+                //Send message to user
+                message.channel.send(oldname + " has been changed to: " + newname)
+            } else {
+                message.channel.send(newname + "cannot be found on the hiscores webpage.")
             }
-        } while (match != null);
-
-        message.channel.send(myArray);
-        // seperate 2 args
-        // check 1e is in memberslist
-        // check 2e is valid
-        // const firstArgIsAlreadyMember = checks.isAlreadyMember(message, arg1);
-        // const validUser = await checks.isValidUser(message, arg2);
-            // change 1e name in 2e name in memberslist
-            // change 1e scores in 2e scores in scores
+        } else {
+            message.channel.send(oldname + " is not part of the memberslist.")
+        }
     },
-
-    seperateByQuotes(args) {
-
-        args.match(/\w+|"[^"]+"/g);
-        console.log(args);
-    }
 };
