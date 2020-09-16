@@ -38,6 +38,7 @@ module.exports = {
                     scores.name = checkedArgs.officalName;
 
                     await scoresService.addScoresOfMember(scores);
+                    membersService.getMembersFromFile();
                     message.channel.send('The scores of member "' + checkedArgs.officalName + '" has been added to the scoreslist!');
                 } catch (error) {
                     message.channel.send('Couldn\'t add member. ' + error);
