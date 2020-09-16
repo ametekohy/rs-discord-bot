@@ -1,7 +1,10 @@
 // includes (external)
+const schedule = require('node-schedule');
+
 const Discord = require('discord.js');
 const bot = new  Discord.Client();
 const fs = require('fs');
+
 
 // includes (internal)
 const config = require('./resources/config');
@@ -27,9 +30,14 @@ bot.on('ready', () => {
     let services = bot.services.get('scoresService');
     const membersService = bot.services.get('membersService');
     const members = membersService.getMembersList();
+
     services.fetchScores(members).then(r =>
         console.log('This bot is online!')
     );
+
+    schedule.scheduleJob('0 0 * * *', () => {
+        services.fetchScores(members)
+    }) // run everyday at midnight
 });
 
 // handle incoming messages
