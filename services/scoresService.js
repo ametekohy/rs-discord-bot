@@ -7,7 +7,10 @@ module.exports = class scoresService {
         let scores = [];
         for (let member of members) {
             let yay = await this.fetchScoresOfMember(member);
-            scores.push(yay);
+
+            if(yay !== undefined) {
+                scores.push(yay);
+            }
         }
 
         let data = JSON.stringify(scores, null, 2);
@@ -25,7 +28,9 @@ module.exports = class scoresService {
                 .then(body => results += body));
 
         let scoresOfMember;
-        if (results !== undefined) {
+
+        let test = results.charAt(9);
+        if (test !== '<' ) {
             // split by enters and remove first 35 items
             results = results.split("\n").slice(35);
 
