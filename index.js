@@ -94,6 +94,9 @@ bot.on('message', async message => {
             case 'ehb':
                 await command.displayEHB(message, args);
                 break;
+            case 'topranking':
+                command.displayTopScores(message);
+                break;
         }
     }catch (e) {
         await message.channel.send('Invalid command given. Try !help to see available commands. ' + e, e);

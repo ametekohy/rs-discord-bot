@@ -39,11 +39,12 @@ module.exports = {
         const scoresService = services.get('scoresService');
         const scoresList = scoresService.getScoresOfBoss(bossIndex);
 
-        let list = [];
-        for(let i = 0; i < members.length; i++) {
-            list.push({name: members[i], score: scoresList[i]});
-        }
+        //console.log(scoresList);
+        // for(let i = 0; i < members.length; i++) {
+        //     list.push({name: members[i], score: scoresList[i]});
+        // }
 
-        return list.sort(function(a, b){return b.score-a.score});
+
+        return scoresList;//scoresList.sort(function(a, b){return b.score-a.score});
     }
 };

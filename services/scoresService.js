@@ -61,6 +61,25 @@ module.exports = class scoresService {
         return scoresOfMember[0].score;
     }
 
+    getScoresOfAllMembers() {
+        const dataFromFile = fs.readFileSync('./data/scores.json');
+        let scores = JSON.parse(dataFromFile);
+
+        let names = new Array(scores[0].score.length).fill(0);
+        let total = new Array(scores[0].score.length).fill(0);
+
+        for (let score of scores) {     // per persoon + scores
+            for(let i =0; i < score.score.length; i++) { // score van scorelist
+                if(+score.score[i] > +total[i]) {
+                    names[i] = score.name; // naam
+                    total[i] = score.score[i]; // score
+                }
+            }
+        }
+
+        return {"names": names, "scores": total};
+    }
+
     async addScoresOfMember(memberScores) {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
@@ -97,9 +116,9 @@ module.exports = class scoresService {
 
         let total = [];
         for (let score of scores) {
-            total.push(score.score[bossIndex]);
+            total.push({"name": score.name, "score": score.score[bossIndex]});
         }
 
-        return total;
+        return total.sort(function(a, b){return b.score-a.score});
     }
 };
