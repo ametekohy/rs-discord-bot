@@ -6,8 +6,8 @@ module.exports = {
     aliases: ['doggo', 'doge'],
 
     /**
-     * The display for the Dog command.
-     * Fetch json file from https://random.dog and send the url to channel.
+     * The display for the "dog"-command.
+     * Fetches a json-file from https://random.dog and send the url to the Discord channel.
      *
      * @param message - contains the discord message handler
      * @returns {Promise<void>}

@@ -6,7 +6,7 @@ module.exports = {
     usage: '[validUserName]',
 
     /**
-     * The display for the EHB command.
+     * The display for the "ehb"-command.
      * Will calculate and display the EHB of a valid user in the memberslist.
      *
      * @param message - contains the discord message handler
@@ -26,7 +26,7 @@ module.exports = {
     },
 
     async getEHB(message, checkedArgs) {
-        // get data
+        // Get data from services
         const { services } = message.client;
         const bossesService = services.get('bossesService');
         const bossList = bossesService.getBossesList();

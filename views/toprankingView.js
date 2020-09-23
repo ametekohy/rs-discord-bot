@@ -7,16 +7,15 @@ const color = 0x00ffff; //Cyan
 module.exports = {
     createEmbed: function (bossList, nameList, scoreList) {
         const hsEmbed = new Discord.RichEmbed()
-            .setTitle('Toprating of Overload')
+            .setTitle('Topranking of Overload')
             .setColor(color);
-        console.log(nameList);
-        console.log(scoreList);
-        var i;
+
+        let i;
         for(i = 0; i < nameList.length; i++) {
-            var string =
+            let string =
                 ':smiling_imp: ' + bossList[i].name + '\n' +
-                ':crossed_swords: **' +  nameList[i].toUpperCase() + '**\n' +
-                ':skull: **' +  scoreList[i] + '**\n' +
+                ':crossed_swords: **' + nameList[i].toUpperCase() + '**\n' +
+                ':skull: **' + scoreList[i] + '**\n' +
                 '\n';
 
             if(bossList[i+1] !== undefined) {

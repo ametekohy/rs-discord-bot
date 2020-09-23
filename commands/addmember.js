@@ -8,7 +8,7 @@ module.exports = {
     usage: '[validUserName]',
 
     /**
-     * The display for the AddMember command.
+     * The display for the "addMember"-command.
      * 1. Checks if given member's name is already a member
      * 2. Checks if given member's name is a valid osrs name
      * 3a. Adds member's name to members.json
@@ -26,19 +26,22 @@ module.exports = {
         if (isAlreadyMember === false) {
             if (validUser) {
                 try {
+                    // Get data from services
                     const {services} = message.client;
                     const membersService = services.get('membersService');
+                    const scoresService = services.get('scoresService');
 
+                    // add member to memberslist
                     membersService.addMember(checkedArgs.officalName);
                     message.channel.send('The member "' + checkedArgs.officalName + '" has been added to the memberslist!');
 
                     // add the scores of new member to scoreslist
-                    const scoresService = services.get('scoresService');
                     const scores = await scoresService.fetchScoresOfMember(checkedArgs.fetchArg);
                     scores.name = checkedArgs.officalName;
 
                     await scoresService.addScoresOfMember(scores);
                     membersService.getMembersFromFile();
+
                     message.channel.send('The scores of member "' + checkedArgs.officalName + '" has been added to the scoreslist!');
                 } catch (error) {
                     message.channel.send('Couldn\'t add member. ' + error);

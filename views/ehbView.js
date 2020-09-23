@@ -12,13 +12,13 @@ module.exports = {
         top10.setThumbnail(thumbnail);
 
         //Check if list is longer than 10
-        var x;
+        let x;
         if (list.length >= 10) {
             x = 10;
         } else {
             x = list.length
         }
-        var i;
+        let i;
         for (i=0; i<x; i++) {
             top10.addField('Rank ' + (i+1), list[i].name + '\n' + list[i].score)
         }

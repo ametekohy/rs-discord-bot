@@ -8,7 +8,7 @@ module.exports = {
     usage: '[validUserName]',
 
     /**
-     * The display for the RemoveMember command.
+     * The display for the "removeMember"-command.
      * Will verify and remove the given member and their scores from the memberslist.
      *
      * @param message - contains the discord message handler
@@ -21,13 +21,16 @@ module.exports = {
 
         if (isAlreadyMember) {
             try {
+                // Get data from services
                 const {services} = message.client;
                 const membersService = services.get('membersService');
                 const scoresService = services.get('scoresService');
 
+                // Remove member from memberslist and scoreslist
                 membersService.removeMember(isAlreadyMember);
                 scoresService.removeScoresOfMember(isAlreadyMember);
 
+                // Send display to discord
                 message.channel.send('The member "' + checkedArgs.officalName + '" has been removed from the memberslist!');
             } catch (error) {
                 message.channel.send('Couldn\'t remove member from file. ' + error);

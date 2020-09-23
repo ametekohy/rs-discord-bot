@@ -8,8 +8,8 @@ module.exports = {
     usage: '[validBossName]',
 
     /**
-     * The display for the Top10 command.
-     * Will calculate and display the top 10 highest killcounts of members for the provided boss
+     * The display for the "top10"-command.
+     * Will calculate and display the top 10 highest killcounts of members for the provided boss.
      *
      * @param message - contains the discord message handler
      * @param args - the given boss name
@@ -21,30 +21,24 @@ module.exports = {
         if(!validBoss) {
             message.channel.send('"' + checkedArgs.officalName + '"' + ' is not a valid boss!');
         } else {
+            // Construct top10 list
             const list = this.getTop10rankingOfBoss(message, validBoss.name);
+
+            // Create display
             const embed = top10view.createEmbed(validBoss.name, validBoss.image, list);
+
+            // Send display to discord
             message.channel.send(embed);
         }
     },
 
     getTop10rankingOfBoss(message, bossName) {
-        // Loop membersList. Grab score of args boss put list. Sort high low. Display.
+        // Get data from services
         const {services} = message.client;
-        const membersService = services.get('membersService');
-        const members = membersService.getMembersList();
-
         const bossesService = services.get('bossesService');
         const bossIndex = bossesService.getBossIndex(bossName);
-
         const scoresService = services.get('scoresService');
-        const scoresList = scoresService.getScoresOfBoss(bossIndex);
-
-        //console.log(scoresList);
-        // for(let i = 0; i < members.length; i++) {
-        //     list.push({name: members[i], score: scoresList[i]});
-        // }
-
-
-        return scoresList;//scoresList.sort(function(a, b){return b.score-a.score});
+        
+        return scoresService.getScoresOfBoss(bossIndex);
     }
 };

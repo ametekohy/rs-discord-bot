@@ -1,3 +1,4 @@
+// A dynamic help command taken from https://discordjs.guide/command-handling/adding-features.html#a-dynamic-help-command
 module.exports = {
     name: 'help',
     description: 'List all of my commands or info about a specific command.',
