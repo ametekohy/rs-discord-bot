@@ -88,6 +88,13 @@ bot.on('message', async message => {
                     await message.channel.send('You are not part of the Staff.')
                 }
                 break;
+            case 'refresh':
+                if(checkroleisstaff(message)) {
+                    await command.displayRefresh(message);
+                } else {
+                    await message.channel.send('You are not part of the Staff.')
+                }
+                break;
             case 'dog':
                 await command.displayRandomDog(message);
                 break;
