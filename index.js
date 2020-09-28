@@ -31,7 +31,7 @@ bot.on('ready', () => {
     const membersService = bot.services.get('membersService');
     const members = membersService.getMembersList();
 
-    services.fetchScores(members).then(r =>
+    services.fetchScores(members).then(() =>
         console.log('This bot is online!')
     );
 
@@ -67,6 +67,15 @@ bot.on('message', async message => {
             case 'members':
                 command.displayMembers(message);
                 break;
+            case 'dog':
+                await command.displayRandomDog(message);
+                break;
+            case 'ehb':
+                await command.displayEHB(message, args);
+                break;
+            case 'topranking':
+                await command.displayTopScores(message);
+                break;
             case 'addmember':
                 if(checkroleisstaff(message)) {
                     await command.displayAddMember(message, args);
@@ -94,15 +103,6 @@ bot.on('message', async message => {
                 } else {
                     await message.channel.send('You are not part of the Staff.')
                 }
-                break;
-            case 'dog':
-                await command.displayRandomDog(message);
-                break;
-            case 'ehb':
-                await command.displayEHB(message, args);
-                break;
-            case 'topranking':
-                command.displayTopScores(message);
                 break;
         }
     }catch (e) {

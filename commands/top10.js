@@ -39,6 +39,6 @@ module.exports = {
         const bossIndex = bossesService.getBossIndex(bossName);
         const scoresService = services.get('scoresService');
         
-        return scoresService.getScoresOfBoss(bossIndex);
+        return scoresService.getTopScoresOfBoss(bossIndex);
     }
 };

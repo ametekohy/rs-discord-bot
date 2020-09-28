@@ -33,12 +33,10 @@ module.exports = {
         const filterName = bossList.find(x => x.name && x.name.toLowerCase() === args.toLowerCase());
         const filterAlias = bossList.find(x => x.alias && x.alias.toLowerCase() === args.toLowerCase());
 
-        const suggestion = bossList.find(x => x.name.includes(args.toLowerCase()) || x.alias.includes(args.toLocaleString()));
+        const suggestion = bossList.find(x => x.name.includes(args.toLowerCase()) || x.alias.includes(args.toLowerCase()));
 
         if(filterName !== undefined) {
-            // if (filterName.name === args.join(' ')) {
-                return filterName;
-            // }
+            return filterName;
         } else if(filterAlias !== undefined) {
             if (filterAlias.alias === args) {
                 return filterAlias;

@@ -1,5 +1,4 @@
 //Includes (Internal)
-const checks = require('../helpers/checks');
 const topratingView = require('../views/toprankingView');
 
 module.exports = {

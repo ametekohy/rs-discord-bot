@@ -6,10 +6,10 @@ module.exports = class scoresService {
     async fetchScores(members) {
         let scores = [];
         for (let member of members) {
-            let yay = await this.fetchScoresOfMember(member);
+            let memberScores = await this.fetchScoresOfMember(member);
 
-            if(yay !== undefined) {
-                scores.push(yay);
+            if(memberScores !== undefined) {
+                scores.push(memberScores);
             }
         }
 
@@ -24,8 +24,8 @@ module.exports = class scoresService {
     async fetchScoresOfMember(member) {
         let results;
         await fetch('https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=' + member)
-            .then(response => response.text()
-                .then(body => results += body));
+            .then(response => response.text().then(body => results += body))
+            .catch((error => console.log(error)));
 
         let scoresOfMember;
 
@@ -46,7 +46,7 @@ module.exports = class scoresService {
             }
             scoresArr.splice(-1, 1);
 
-            scoresOfMember= {name: member, score: scoresArr};
+            scoresOfMember = {name: member, score: scoresArr};
         }
 
 
@@ -57,7 +57,7 @@ module.exports = class scoresService {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
 
-        let scoresOfMember = scores.filter(x => x.name === member);
+        let scoresOfMember = scores.filter(x => x.name.toLowerCase() === member.toLowerCase());
         return scoresOfMember[0].score;
     }
 
@@ -68,11 +68,11 @@ module.exports = class scoresService {
         let names = new Array(scores[0].score.length).fill(0);
         let total = new Array(scores[0].score.length).fill(0);
 
-        for (let score of scores) {     // per persoon + scores
-            for(let i =0; i < score.score.length; i++) { // score van scorelist
-                if(+score.score[i] > +total[i]) {
-                    names[i] = score.name; // naam
-                    total[i] = score.score[i]; // score
+        for (let score of scores) {                         // per persoon + scores
+            for(let i = 0; i < score.score.length; i++) {   // per score van scorelist
+                if(+score.score[i] > +total[i]) {           // als score hoger dan opgeslagen total
+                    names[i] = score.name;
+                    total[i] = score.score[i];
                 }
             }
         }
@@ -109,8 +109,7 @@ module.exports = class scoresService {
         });
     }
 
-    // doubt function name
-    getScoresOfBoss(bossIndex) {
+    getTopScoresOfBoss(bossIndex) {
         const dataFromFile = fs.readFileSync('./data/scores.json');
         let scores = JSON.parse(dataFromFile);
 

@@ -16,7 +16,7 @@ module.exports = {
             const membersService = services.get('membersService');
 
             // Send display to discord
-            message.channel.send("There are " + membersService.getAmountOfMembers() + " members in Overload CC");
+            message.channel.send("There are **" + membersService.getAmountOfMembers() + "** members in Overload CC");
         } catch (error) {
             message.channel.send('Couldn\'t get membersList from file. ' + error);
         }

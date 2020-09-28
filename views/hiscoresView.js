@@ -10,8 +10,7 @@ module.exports = {
             .setTitle('Hiscore of '+ playername + ':crossed_swords:')
             .setColor(color);
 
-        let i;
-        for(i = 0; i < list.length; i++) {
+        for(let i = 0; i < list.length; i++) {
             let string = ':smiling_imp: ' + list[i].bossname + '\n' + ':skull: **' + list[i].score + '**\n' +
                 '\n';
 

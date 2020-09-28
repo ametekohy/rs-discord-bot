@@ -14,7 +14,9 @@ module.exports = {
      */
     async displayRandomDog(message) {
         try {
-            const file = await fetch('https://random.dog/woof.json').then(body => body.json());
+            const file = await fetch('https://random.dog/woof.json')
+                .then(body => body.json())
+                .catch((error => console.log(error)));
             message.channel.send(file.url);
         } catch (error) {
             message.channel.send('Couldn\'t get dogs from api. ' + error);

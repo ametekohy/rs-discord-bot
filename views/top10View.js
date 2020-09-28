@@ -6,22 +6,18 @@ const color = 0x00ffff; //Cyan
 
 module.exports = {
     createEmbed: function (bossname, thumbnail, list) {
-
         const top10 = new Discord.RichEmbed();
         top10.setTitle('Top 10 ' + bossname +' Killcounts');
         top10.setColor(color);
         top10.setThumbnail(thumbnail);
 
         //Check if list is longer than 10
-        let x;
         if (list.length >= 10) {
-            x = 10;
-        } else {
-            x = list.length
+            list.length = 10;
         }
-        let i;
-        for (i=0; i<x; i++) {
-            top10.addField('Rank ' + (i+1), list[i].name + '\n' + list[i].score)
+
+        for (let amountOfListItems = 0; amountOfListItems < list.length; amountOfListItems++) {
+            top10.addField('Rank ' + (amountOfListItems+1), list[amountOfListItems].name + '\n' + list[amountOfListItems].score)
         }
         return top10;
     }

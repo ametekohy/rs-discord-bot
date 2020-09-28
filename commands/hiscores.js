@@ -45,6 +45,7 @@ module.exports = {
         bosses.forEach(function (item, index) {
             hiscoresList.push({"bossname": item.name, "score": scores[index]});
         });
+
         return hiscoresList;
     }
 };

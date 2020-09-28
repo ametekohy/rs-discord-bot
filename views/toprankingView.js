@@ -10,18 +10,17 @@ module.exports = {
             .setTitle('Topranking of Overload')
             .setColor(color);
 
-        let i;
-        for(i = 0; i < nameList.length; i++) {
+        for(let i = 0; i < nameList.length; i++) {
             let string =
                 ':smiling_imp: ' + bossList[i].name + '\n' +
-                ':crossed_swords: **' + nameList[i].toUpperCase() + '**\n' +
+                ':crossed_swords: **' + nameList[i] + '**\n' +
                 ':skull: **' + scoreList[i] + '**\n' +
                 '\n';
 
             if(bossList[i+1] !== undefined) {
                 string +=
                     ':smiling_imp: ' + bossList[i+1].name + '\n' +
-                    ':crossed_swords: **' +  nameList[i+1].toUpperCase() + '**\n' +
+                    ':crossed_swords: **' +  nameList[i+1] + '**\n' +
                     ':skull: **' +  scoreList[i+1] + '**\n'
             }
 
@@ -30,6 +29,7 @@ module.exports = {
                 , true);
             i++;
         }
+
         return hsEmbed;
     }
 };
