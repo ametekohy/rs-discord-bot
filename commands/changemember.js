@@ -6,6 +6,7 @@ module.exports = {
     name: 'changemember',
     description: 'Change old rsn to new rsn. Syntax: !change oldname-newname',
     aliases: ['change'],
+    usage: '[oldname]-[newname]',
 
     /**
      *
@@ -15,16 +16,19 @@ module.exports = {
      */
     displayChangeMember(message, args) {
         //concatenate both arguments into 1 string
-        let argument = ""
-        for (i=0; i<args.length; i++) {
+        let argument = "";
+        for (let i=0; i<args.length; i++) {
             argument += args[i] + " " 
         }
+
         //Remove last " " at the end of the string
-        argument = argument.substring(0, argument.length - 1)
+        argument = argument.substring(0, argument.length - 1);
+
         //Cut "-" from the args, make 2 args
-        let splitnames = argument.split("-")
-        let oldname = splitnames[0]
-        let newname = splitnames[1]
+        let splitnames = argument.split("-");
+        let oldname = splitnames[0];
+        let newname = splitnames[1];
+
         //Check if old name is part of memberslist.txt
         if (checks.isAlreadyMember(message, oldname)) {
         //Check new name is valid on osrs hiscores webpage
@@ -33,8 +37,8 @@ module.exports = {
                 const dataFromFile = fs.readFileSync('./data/members.json');
                 let memberslist = JSON.parse(dataFromFile);
                 //Find index for old name
-                let index = memberslist.members.findIndex(x => x === oldname)
-                memberslist.members[index] = newname
+                let index = memberslist.members.findIndex(x => x === oldname);
+                memberslist.members[index] = newname;
                 //Save new name in JSON file
                 fs.writeFileSync('./data/members.json', JSON.stringify(memberslist));
                 //Update memberslist
@@ -42,12 +46,12 @@ module.exports = {
                 const membersService = services.get('membersService');
                 membersService.getMembersFromFile();
                 //Send message to user
-                message.channel.send(oldname + " has been changed to: " + newname)
+                message.channel.send(oldname + " has been changed to: " + newname);
             } else {
-                message.channel.send(newname + "cannot be found on the hiscores webpage.")
+                message.channel.send(newname + "cannot be found on the hiscores webpage.");
             }
         } else {
-            message.channel.send(oldname + " is not part of the memberslist.")
+            message.channel.send(oldname + " is not part of the memberslist.");
         }
     },
 };

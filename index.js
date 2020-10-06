@@ -27,17 +27,23 @@ for(const file of servicesFiles) {
 
 // ready status when bot goes online
 bot.on('ready', () => {
-    let services = bot.services.get('scoresService');
+    const scoresService = bot.services.get('scoresService');
     const membersService = bot.services.get('membersService');
     const members = membersService.getMembersList();
 
-    services.fetchScores(members).then(() =>
+    scoresService.fetchScores(members).then(() =>
         console.log('This bot is online!')
     );
 
-    schedule.scheduleJob('0 0 * * *', () => {
-        services.fetchScores(members)
-    }) // run everyday at midnight
+    // Recurrence rule: https://www.npmjs.com/package/node-schedule
+    let rule = new schedule.RecurrenceRule();
+    rule.hour = 0;
+
+    // run everyday at midnight
+    schedule.scheduleJob(rule, (fireDate) => {
+        console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+        scoresService.fetchScores(members).then(() => console.log('Fetching scores at midnight.'))
+    })
 });
 
 // handle incoming messages
@@ -50,6 +56,24 @@ bot.on('message', async message => {
     const command = bot.commands.get(commandName)
         || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+    if(message.guild !== null){ // If in guild
+        let role = message.guild.roles.find(r => r.name === 'Staff');
+        if (message.member.roles.has(role.id)) {  // If in Staff
+            if(await staffCommands(command, message, args) === false) {
+                await commands(command, message, args);
+            }
+        } else { // Not in Staff
+            await commands(command, message, args);
+        }
+    } else { // If not in guild
+        await commands(command, message, args);
+    }
+});
+
+//Execute on discord
+bot.login(config.token);
+
+async function commands(command, message, args) {
     try {
         switch (command.name) {
             case 'help':
@@ -76,50 +100,31 @@ bot.on('message', async message => {
             case 'topranking':
                 await command.displayTopScores(message);
                 break;
+        }
+    }catch (error) {
+        await message.channel.send('Invalid command given. Try !help to see available commands.', error);
+    }
+}
+
+async function staffCommands(command, message, args) {
+    try {
+        switch (command.name) {
             case 'addmember':
-                if(checkroleisstaff(message)) {
-                    await command.displayAddMember(message, args);
-                } else {
-                    await message.channel.send('You are not part of the Staff.')
-                }
+                await command.displayAddMember(message, args);
                 break;
             case 'changemember':
-                if(checkroleisstaff(message)) {
-                    await command.displayChangeMember(message, args);
-                } else {
-                    await message.channel.send('You are not part of the Staff.')
-                }
+                await command.displayChangeMember(message, args);
                 break;
             case 'removemember':
-                if(checkroleisstaff(message)) {
-                    await command.displayRemoveMember(message, args);
-                } else {
-                    await message.channel.send('You are not part of the Staff.')
-                }
+                await command.displayRemoveMember(message, args);
                 break;
             case 'refresh':
-                if(checkroleisstaff(message)) {
-                    await command.displayRefresh(message);
-                } else {
-                    await message.channel.send('You are not part of the Staff.')
-                }
+                await command.displayRefresh(message);
                 break;
+            default:
+                return false;
         }
-    }catch (e) {
-        await message.channel.send('Invalid command given. Try !help to see available commands. ' + e, e);
+    } catch (error) {
+        await message.channel.send('Invalid staff-command. Try !help to see available commands.', error);
     }
-
-});
-
-//Execute on discord
-bot.login(config.token);
-
-function checkroleisstaff(message) {
-    // //Find role id of 'Staff'
-    // role = message.guild.roles.find(r => r.name === 'Staff');
-    // //Check if user has 'Staff' role
-    // if (message.member.roles.has(role.id)) {
-    //     return true;
-    // }
-    return true;
 }
