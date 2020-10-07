@@ -1,7 +1,7 @@
 Tests:
 
 addmember
-	%addmember not erony (in private message)		Expectation: doens't work.													Result: Doesn't work.
+	%addmember not erony (in private message)		Expectation: doens't work.													Result: Works as expected.
 	%addmember not erony 							Expectation: can be added, is not part of the clan yet.						Result: Works as expected.
 	%addmember not erony 							Expectation: cannot be added, already part of the clan.						Result: Works as expected.
 	%add not erony									Expectation: Cannot be added, already part of the clan.						Result: Works as expected.
