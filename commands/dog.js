@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 module.exports = {
     name: 'dog',
-    description: 'Will display a random image/gif/mp4 of dogs.',
+    description: 'Display a random image/gif/mp4 of dogs.',
     aliases: ['doggo', 'doge'],
 
     /**

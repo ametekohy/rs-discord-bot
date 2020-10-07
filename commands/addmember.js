@@ -3,7 +3,7 @@ const checks = require('../helpers/checks');
 
 module.exports = {
     name: 'addmember',
-    description: 'Adds a valid osrs member and their scores to the memberslist.',
+    description: 'Add a valid osrs member to the memberslist. Their hiscores will be fetched and added as well.',
     aliases: ['add'],
     usage: '[validUserName]',
 

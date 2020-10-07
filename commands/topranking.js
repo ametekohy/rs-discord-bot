@@ -3,7 +3,7 @@ const topratingView = require('../views/toprankingView');
 
 module.exports = {
     name: 'topranking',
-    description: 'Will display a topranking of Overload; the bosses with the member who has the highest killcount for them.',
+    description: 'Will display a list of the members with the highest killcount for each boss.',
     aliases: ['top'],
 
     /**

@@ -2,7 +2,7 @@ const bossesView = require('../views/bossesView');
 
 module.exports = {
     name: 'bosses',
-    description: 'Will display a list of all available aliases of bosses.',
+    description: 'Display a list of all available aliases of bosses.',
     aliases: ['aliases'],
 
     /**

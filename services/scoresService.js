@@ -48,8 +48,6 @@ module.exports = class scoresService {
 
             scoresOfMember = {name: member, score: scoresArr};
         }
-
-
         return scoresOfMember;
     }
 

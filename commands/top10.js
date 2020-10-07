@@ -4,7 +4,7 @@ const top10view = require('../views/top10View');
 
 module.exports = {
     name: 'top10',
-    description: 'Will calculate and display the top 10 highest killcounts of members for the provided boss.',
+    description: 'Will calculate and display the top 10 highest killcounts for the provided boss.',
     usage: '[validBossName]',
 
     /**

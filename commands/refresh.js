@@ -1,6 +1,6 @@
 module.exports = {
     name: 'refresh',
-    description: ' ',
+    description: 'Refresh the hiscores for every member.',
     aliases: ['anew'],
 
     async displayRefresh(message) {

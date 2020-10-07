@@ -4,7 +4,7 @@ const fs = require('fs');
 
 module.exports = {
     name: 'changemember',
-    description: 'Change old rsn to new rsn. Syntax: !change oldname-newname',
+    description: 'Change an old rsn to a new rsn.',
     aliases: ['change'],
     usage: '[oldname]-[newname]',
 
@@ -33,25 +33,20 @@ module.exports = {
         if (checks.isAlreadyMember(message, oldname)) {
         //Check new name is valid on osrs hiscores webpage
             if (checks.isValidUser(message, newname)) {
-                //Open JSON file
-                const dataFromFile = fs.readFileSync('./data/members.json');
+                const dataFromFile = fs.readFileSync('./data/members.json');    //Open JSON file
                 let memberslist = JSON.parse(dataFromFile);
-                //Find index for old name
-                let index = memberslist.members.findIndex(x => x === oldname);
+                let index = memberslist.members.findIndex(x => x === oldname);  //Find index for old name
                 memberslist.members[index] = newname;
-                //Save new name in JSON file
-                fs.writeFileSync('./data/members.json', JSON.stringify(memberslist));
-                //Update memberslist
+                fs.writeFileSync('./data/members.json', JSON.stringify(memberslist)); //Save new name in JSON file
                 const {services} = message.client;
-                const membersService = services.get('membersService');
+                const membersService = services.get('membersService'); //Update memberslist
                 membersService.getMembersFromFile();
-                //Send message to user
-                message.channel.send(oldname + " has been changed to: " + newname);
+                message.channel.send(oldname + " has been changed to: " + newname); //Send message to user
             } else {
-                message.channel.send(newname + "cannot be found on the hiscores webpage.");
+                message.channel.send(newname + " cannot be found on the hiscores webpage.");
             }
         } else {
-            message.channel.send(oldname + " is not part of the memberslist.");
+            message.channel.send("The name " + oldname + "is not in the memberslist!");
         }
     },
 };

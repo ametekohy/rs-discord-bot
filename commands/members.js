@@ -1,6 +1,6 @@
 module.exports = {
     name: 'members',
-    description: 'Will display the amount of members in the membersList',
+    description: 'Will display the amount of members in the membersList.',
     aliases: ['member'],
 
     /**

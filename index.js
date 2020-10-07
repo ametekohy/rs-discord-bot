@@ -38,7 +38,7 @@ bot.on('ready', () => {
     // Recurrence rule: https://www.npmjs.com/package/node-schedule
     let rule = new schedule.RecurrenceRule();
     rule.hour = 0;
-
+    
     // run everyday at midnight
     schedule.scheduleJob(rule, (fireDate) => {
         console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());

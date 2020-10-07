@@ -1,0 +1,184 @@
+Tests:
+
+addmember
+	%addmember not erony (in private message)		Expectation: doens't work.													Result: Doesn't work.
+	%addmember not erony 							Expectation: can be added, is not part of the clan yet.						Result: Works as expected.
+	%addmember not erony 							Expectation: cannot be added, already part of the clan.						Result: Works as expected.
+	%add not erony									Expectation: Cannot be added, already part of the clan.						Result: Works as expected.
+	%add not_erony									Expectation: cannot be added, doesn't exist.								Result: DOES NOT work as expected. not_erony is added with the hiscores of not erony
+	%add not	erony								Expectation: spaces are replaced with 1 space.								Result: Works as expected.
+
+bosses
+	%bosses											Expectation: the list.														Result: Works as expected.
+	%aliases										Expectation: the list.														Result: Works as expected.
+	%boosses										Expectation: no list.														Result: DOES NOT work as expected. "Invalid staff-command. Try !help to see available commands." This is not a staff command.
+	%aliaases										Expectation: no list.														Result: DOES NOT work as expected. "Invalid staff-command. Try !help to see available commands." This is not a staff command.
+
+changemember
+	%changemember erony-not erony					Expectation: name changed %hs not erony should give the scores of erony.	Result: DOES NOT work as expected. After %hs not erony :The name "not erony" is not in the memberslist!
+	%change not erony-erony							Expectation: name chanhed back to erony.									Result: DOES NOT work as expected. not erony is not part of the memberslist.
+	%change not erony-erony							Expectation: not erony is not part of the clan.								Result: Cannot be tested because of previous results.
+	%change erony-not_erony							Expectation: not_erony doens't exist.										Result: Cannot be tested because of previous results.
+	
+dog	
+	%dog											Expectation: send png/gif/mp4 of a dog.										Result: Works as expected.
+	%doge											Expectation: send png/gif/mp4 of a dog. 									Result: Works as expected.
+	%doggo											Expectation: send png/gif/mp4 of a dog. 									Result: Works as expected.
+	%doog											Expectation: Does not work.													Result: Works as expected.
+	
+ehb
+	%ehb erony										Expectation: See ehb of erony.												Result:	Works as expected.
+	%ehb eerony										Expectation: Is not part of the clan.										Result: Works as expected.
+	%ehb Erony										Expectation: See ehb of erony.												Result: Works as expected.
+	%ehb not erony									Expectation: Is not part of the clan.										Result: Works as expected.
+	%ehb 123										Expectation: Is not part of the clan.										Result: Works as expected.
+	%ehb !@#										Expectation: Is not part of the clan.										Result: Works as expected.
+
+help
+	%help											Expectation: Gives a list of all commands. 									Result:	Works as expected.
+	%help addmember									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help add										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help bosses									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help aliases									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help changemember								Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help change									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help dog										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help doggo										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help doge										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help ehb										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help hiscores									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help hs										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help members									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help member									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help refresh									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help anew										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help removemember								Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help remove									Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help top10										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help topranking								Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help top										Expectation: Gives information for the given command. 						Result:	Works as expected.
+	%help 123										Expectation: Not a valid command. 											Result:	Works as expected.
+	%help !@#										Expectation: Not a valid command. 											Result:	Works as expected.
+	
+hiscores
+	%hiscores erony 								Expectation: Shows the hiscores of erony. 									Result: Works as expected.
+	%hiscores Erony 								Expectation: Shows the hiscores of erony. 									Result: Works as expected.
+	%hs erony 										Expectation:  Shows the hiscores of erony. 									Result: Works as expected.
+	%hs not erony 									Expectation: not erony is not part of the memberslist. 						Result: Works as expected.
+	%hs 123 										Expectation: 123 is not part of the memberslist. 							Result: Works as expected.
+
+members
+	%members 										Expectation: Shows the amount of members in the clan. 						Result: Works as expected.
+	%member 										Expectation: Shows the amount of members in the clan.  						Result: Works as expected.
+	%mem 											Expectation: Unknown command. 												Result: DOES NOT work as expected. "Invalid staff-command. Try !help to see available commands." This is not a staff command.
+
+refresh
+	%refresh 										Expectation: Refresh the hiscores. 											Result: 
+	%anew 											Expectation: Refresh the hiscores. 											Result: 
+	%re 											Expectation: Unknown command. 												Result: 
+	
+removemember
+	%removemember erony 							Expectation: Removed erony, %hs erony does not work anymore. 				Result: Works as expected.
+	%removemember not erony 						Expectation: Is not part of the clan. 										Result: Works as expected.
+	%remove erony 									Expectation: Removed erony, %hs erony does not work anymore. 				Result: Works as expected.
+	%remove not erony 								Expectation: Is not part of the clan. 										Result: Works as expected.
+	%remove 123 									Expectation: Is not part of the clan. 										Result: Works as expected.
+	%remove !@# 									Expectation: Is not part of the clan. 										Result: Works as expected.
+
+top10
+	%top10 Abyssal Sire 							Expectation: Shows the top 10 for the given boss. 							Result: Works as expected.
+	%top10 sire 									Expectation: Shows the top 10 for the given boss.  							Result: Works as expected.
+	%top10 Alchemical Hydra 						Expectation: Shows the top 10 for the given boss. 							Result: Works as expected.
+	%top10 hydra 									Expectation: Shows the top 10 for the given boss.  							Result: Works as expected.
+	%top10 Barrows Chests 							Expectation: Shows the top 10 for the given boss. 							Result: Works as expected.
+	%top10 barrows 									Expectation: Shows the top 10 for the given boss. 							Result: Works as expected.
+	%top10 Bryophyta 								Expectation: Shows the top 10 for the given boss. 							Result: Works as expected.
+	%top10 bryo 									Expectation: Shows the top 10 for the given boss.  							Result: Works as expected.
+	%top10 Callisto 								Expectation: Shows the top 10 for the given boss.  							Result: Works as expected.
+	%top10 callisto 								Expectation: Shows the top 10 for the given boss.  							Result: Works as expected.
+	%top10 Cerberus 								Expectation: Shows the top 10 for the given boss.  							Result: Works as expected.
+	%top10 cerb 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Chambers of Xeric 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 cox 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Chambers of Xeric: Challenge Mode 		Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 cm 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Chaos Elemental 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 chaos ele 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Chaos Fanatic 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 chaos fanatic 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Commander Zilyana 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 sara 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Corporeal Beast 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 corp 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Crazy Archaeologist 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 crazy arch 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Dagannoth Prime 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 prime 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Dagannoth Rex 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 rex 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Dagannoth Supreme 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 supreme 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Deranged Archaeologist 					Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 deranged arch 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 General Graardor 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 bandos 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Giant Mole 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 mole 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Grotesque Guardians 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 guardians 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Hespori 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 hespori 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Kalphite Queen 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 kq 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 King Black Dragon 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 kbd 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Kraken 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 kraken 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Kree'Arra 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 arma 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 K'ril Tsutsaroth 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 zammy 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Mimic									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 mimic 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Nightmare 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 nightmare 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Obor 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 obor 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Sarachnis 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 sarachnis 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Scorpia 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 scorpia 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Skotizo 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 skotizo 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 The Gauntlet 							Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 gauntlet 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 The Corrupted Gauntlet 					Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 corrupted gauntlet						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Theatre of Blood 						Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 tob 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Thermonuclear Smoke Devil 				Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 thermy 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 TzKal-Zuk 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 zuk 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 TzTok-Jad 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 jad 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Venenatis 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 venenatis 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Vet'ion 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 vetion 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Vorkath 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 vorkath 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Wintertodt 								Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 wt 										Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Zalcano 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 zalcano 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 Zulrah 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 zulrah 									Expectation: Shows the top 10 for the given boss.                           Result: Works as expected.
+	%top10 123 										Expectation: Does not work.                                                 Result: Works as expected.
+	%top10 !@# 										Expectation: Does not work.                                                 Result: Works as expected.
+	
+topranking
+	%topranking 									Expectation: Shows the top ranking for each boss. 							Result: Works as expected.
+	%top 											Expectation: Shows the top ranking for each boss. 							Result: Works as expected.
+	%top123 										Expectation: Unknown command. 												Result: Works as expected.
+	%top!@# 										Expectation: Unknown command. 												Result: Works as expected.

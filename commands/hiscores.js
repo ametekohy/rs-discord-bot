@@ -4,7 +4,7 @@ const hiscoresView = require('../views/hiscoresView');
 
 module.exports = {
     name: 'hiscores',
-    description: 'Will display the highscores/killcount for each boss of the provided member.',
+    description: 'Will display the killcount for each boss of the provided member.',
     aliases: ['hs'],
     usage: '[validUserName]',
 
