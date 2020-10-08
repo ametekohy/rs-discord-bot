@@ -35,8 +35,7 @@ module.exports = {
             if (checks.isValidUser(message, newname)) {
                 const dataFromFile = fs.readFileSync('./data/members.json');    //Open JSON file
                 let memberslist = JSON.parse(dataFromFile);
-                let index = memberslist.members.findIndex(x => x.toLowerCase() === oldname.toLowerCase())  //Find index for old name
-                console.log(index)
+                let index = memberslist.members.findIndex(x => x.toLowerCase() === oldname.toLowerCase());  //Find index for old name
                 memberslist.members[index] = newname;
                 fs.writeFileSync('./data/members.json', JSON.stringify(memberslist)); //Save new name in JSON file
                 const {services} = message.client;
