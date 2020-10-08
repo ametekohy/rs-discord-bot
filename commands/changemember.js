@@ -35,7 +35,8 @@ module.exports = {
             if (checks.isValidUser(message, newname)) {
                 const dataFromFile = fs.readFileSync('./data/members.json');    //Open JSON file
                 let memberslist = JSON.parse(dataFromFile);
-                let index = memberslist.members.findIndex(x => x === oldname);  //Find index for old name
+                let index = memberslist.members.findIndex(x => x.toLowerCase() === oldname.toLowerCase())  //Find index for old name
+                console.log(index)
                 memberslist.members[index] = newname;
                 fs.writeFileSync('./data/members.json', JSON.stringify(memberslist)); //Save new name in JSON file
                 const {services} = message.client;
@@ -46,7 +47,7 @@ module.exports = {
                 message.channel.send(newname + " cannot be found on the hiscores webpage.");
             }
         } else {
-            message.channel.send("The name " + oldname + "is not in the memberslist!");
+            message.channel.send("The name " + oldname + " is not in the memberslist!");
         }
     },
 };
