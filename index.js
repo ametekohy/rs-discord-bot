@@ -1,10 +1,13 @@
 // includes (external)
+const schedule = require('node-schedule');
+
 const Discord = require('discord.js');
 const bot = new  Discord.Client();
 const fs = require('fs');
 
+
 // includes (internal)
-const config = require('./resources/config.js');
+const config = require('./resources/config');
 
 // set all commands from the command folder
 bot.commands = new Discord.Collection();
@@ -14,21 +17,33 @@ for(const file of commandFiles) {
     bot.commands.set(command.name, command);
 }
 
-// set all models from the models folder
+// set all services from the services folder
 bot.services = new Discord.Collection();
-const servicesFiles = fs.readdirSync('./models/').filter(file => file.endsWith('.js'));
+const servicesFiles = fs.readdirSync('./services/').filter(file => file.endsWith('.js'));
 for(const file of servicesFiles) {
-    const service = require(`./models/${file}`);
+    const service = require(`./services/${file}`);
     bot.services.set(service.name, new service);
 }
 
 // ready status when bot goes online
 bot.on('ready', () => {
-    let test = bot.services.get('scoresService');
+    const scoresService = bot.services.get('scoresService');
     const membersService = bot.services.get('membersService');
-    const members = membersService.getMembersFromFile();
-    test.fetchScores(members);
-    console.log('This bot is online!');
+    const members = membersService.getMembersList();
+
+    scoresService.fetchScores(members).then(() =>
+        console.log('This bot is online!')
+    );
+
+    // Recurrence rule: https://www.npmjs.com/package/node-schedule
+    let rule = new schedule.RecurrenceRule();
+    rule.hour = 0;
+    
+    // run everyday at midnight
+    schedule.scheduleJob(rule, (fireDate) => {
+        console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+        scoresService.fetchScores(members).then(() => console.log('Fetching scores at midnight.'))
+    })
 });
 
 // handle incoming messages
@@ -41,57 +56,75 @@ bot.on('message', async message => {
     const command = bot.commands.get(commandName)
         || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-    switch (command.name) {
-        case 'help':
-            command.displayCommands(message, args);
-            break;
-        case 'hiscores':
-            command.displayScores(message, args);
-            break;
-        case 'top10':
-            command.displayTop10rankingOfBoss(message, args);
-            break;
-        case 'bosses':
-            command.displayBosses(message);
-            break;
-        case 'members':
-            command.displayMembers(message);
-            break;
-        case 'addmember':
-            if(checkroleisstaff(message)) {
-                command.displayAddMember(message, args);
-            } else {
-                message.channel.send('You are not part of the Staff.')
+    if(message.guild !== null){ // If in guild
+        let role = message.guild.roles.find(r => r.name === 'Staff');
+        if (message.member.roles.has(role.id)) {  // If in Staff
+            if(await staffCommands(command, message, args) === false) {
+                await commands(command, message, args);
             }
-            break;
-        case 'removemember':
-            if(checkroleisstaff(message)) {
-                command.displayRemoveMember(message, args);
-            } else {
-                message.channel.send('You are not part of the Staff.')
-            }
-            break;
-        case 'dog':
-            command.displayRandomDog(message);
-            break;
-        case 'ehb':
-            command.displayEHB(message, args);
-            break;
-        // case 'role':
-        //     command.assignrole(message, args);
-        //     break;
+        } else { // Not in Staff
+            await commands(command, message, args);
+        }
+    } else { // If not in guild
+        await commands(command, message, args);
     }
 });
 
 //Execute on discord
 bot.login(config.token);
 
-function checkroleisstaff(message) {
-    // //Find role id of 'Staff'
-    // role = message.guild.roles.find(r => r.name === 'Staff');
-    // //Check if user has 'Staff' role
-    // if (message.member.roles.has(role.id)) {
-    //     return true;
-    // }
-    return true;
+async function commands(command, message, args) {
+    try {
+        switch (command.name) {
+            case 'help':
+                command.displayCommands(message, args);
+                break;
+            case 'hiscores':
+                await command.displayScores(message, args);
+                break;
+            case 'top10':
+                command.displayTop10rankingOfBoss(message, args);
+                break;
+            case 'bosses':
+                command.displayBosses(message);
+                break;
+            case 'members':
+                command.displayMembers(message);
+                break;
+            case 'dog':
+                await command.displayRandomDog(message);
+                break;
+            case 'ehb':
+                await command.displayEHB(message, args);
+                break;
+            case 'topranking':
+                await command.displayTopScores(message);
+                break;
+        }
+    }catch (error) {
+        await message.channel.send('Invalid command given. Try !help to see available commands.', error);
+    }
+}
+
+async function staffCommands(command, message, args) {
+    try {
+        switch (command.name) {
+            case 'addmember':
+                await command.displayAddMember(message, args);
+                break;
+            case 'changemember':
+                await command.displayChangeMember(message, args);
+                break;
+            case 'removemember':
+                await command.displayRemoveMember(message, args);
+                break;
+            case 'refresh':
+                await command.displayRefresh(message);
+                break;
+            default:
+                return false;
+        }
+    } catch (error) {
+        await message.channel.send('Invalid staff-command. Try !help to see available commands.', error);
+    }
 }

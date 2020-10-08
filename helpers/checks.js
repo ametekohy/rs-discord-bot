@@ -1,19 +1,24 @@
 module.exports = {
-    isMember(message, args) {
+    isAlreadyMember(message, args) {
         const { services } = message.client;
         const membersService = services.get('membersService');
-        const members = membersService.getMembersFromFile();
+        const members = membersService.getMembersList();
 
-        const filterName = members.find(x => x === args);
-        return !!filterName;
+        const filterName = members.find(x => x.toLowerCase() === args.toLowerCase());
+
+        if(filterName !== undefined) {
+            return filterName;
+        } else {
+            return false;
+        }
     },
 
     async isValidUser(message, args) {
         const { services } = message.client;
         const scoresService = services.get('scoresService');
-        let result = scoresService.fetchScoresOfMember(args);
+        let result = await scoresService.fetchScoresOfMember(args);
 
-        if(result === undefined || result === null) {
+        if(result === undefined || result === null || result.score === undefined || result.score.length === 0) {
             return false;
         } else {
             return result;
@@ -23,19 +28,22 @@ module.exports = {
     isValidBoss(message, args) {
         const { services } = message.client;
         const bossesService = services.get('bossesService');
-        const bossList = bossesService.getBossesFromFile();
+        const bossList = bossesService.getBossesList();
 
-        var filterName = bossList.find(x => x.name && x.name === args[0]);
-        var filterAlias = bossList.find(x => x.alias && x.alias === args[0]);
+        const filterName = bossList.find(x => x.name && x.name.toLowerCase() === args.toLowerCase());
+        const filterAlias = bossList.find(x => x.alias && x.alias.toLowerCase() === args.toLowerCase());
+
+        const suggestion = bossList.find(x => x.name.includes(args.toLowerCase()) || x.alias.includes(args.toLowerCase()));
 
         if(filterName !== undefined) {
-            if (filterName.name === args.join(' ')) {
-                return filterName;
-            }
+            return filterName;
         } else if(filterAlias !== undefined) {
-            if (filterAlias.alias === args[0]  ) {
+            if (filterAlias.alias === args) {
                 return filterAlias;
             }
+        } else if(suggestion !== undefined) {
+            message.channel.send('Do you mean: ' + suggestion.name + ' (' + suggestion.alias + ')?');
+            return false;
         } else {
             return false;
         }

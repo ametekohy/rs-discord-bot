@@ -1,41 +1,44 @@
 //Includes (Internal)
 const checks = require('../helpers/checks');
-const embeds = require('../views/embeds');
+const top10view = require('../views/top10View');
 
 module.exports = {
     name: 'top10',
-    description: 'Will views the top 10 highest killcounts for the provided boss',
+    description: 'Will calculate and display the top 10 highest killcounts for the provided boss.',
     usage: '[validBossName]',
 
+    /**
+     * The display for the "top10"-command.
+     * Will calculate and display the top 10 highest killcounts of members for the provided boss.
+     *
+     * @param message - contains the discord message handler
+     * @param args - the given boss name
+     */
     displayTop10rankingOfBoss(message, args) {
-        const validBoss = checks.isValidBoss(message, args);
+        const checkedArgs = checks.arguments(args);
+        const validBoss = checks.isValidBoss(message, checkedArgs.officalName);
 
         if(!validBoss) {
-            message.channel.send(args + ' is not a valid boss!');
+            message.channel.send('"' + checkedArgs.officalName + '"' + ' is not a valid boss!');
         } else {
+            // Construct top10 list
             const list = this.getTop10rankingOfBoss(message, validBoss.name);
-            const embed = embeds.createtop10(validBoss.name, validBoss.image, list);
+
+            // Create display
+            const embed = top10view.createEmbed(validBoss.name, validBoss.image, list);
+
+            // Send display to discord
             message.channel.send(embed);
         }
     },
 
     getTop10rankingOfBoss(message, bossName) {
-        // Loop membersList. Grab score of args boss put list. Sort high low. Display.
+        // Get data from services
         const {services} = message.client;
-        const membersService = services.get('membersService');
-        const members = membersService.getMembersFromFile();
-
         const bossesService = services.get('bossesService');
-        const bossIndex = bossesService.getBossIndexFromFile(bossName)
-
+        const bossIndex = bossesService.getBossIndex(bossName);
         const scoresService = services.get('scoresService');
-        const scoresList = scoresService.getScoresOfBoss(bossIndex);
-
-        let list = [];
-        for(let i = 0; i < members.length; i++) {
-            list.push({name: members[i], score: scoresList[i]});
-        }
-
-        return list.sort(function(a, b){return b.score-a.score});
+        
+        return scoresService.getTopScoresOfBoss(bossIndex);
     }
 };

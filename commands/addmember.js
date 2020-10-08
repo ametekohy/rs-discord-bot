@@ -3,13 +3,16 @@ const checks = require('../helpers/checks');
 
 module.exports = {
     name: 'addmember',
-    description: 'Adds a valid osrs member to the memberslist',
-    aliases: ['addm'],
+    description: 'Add a valid osrs member to the memberslist. Their hiscores will be fetched and added as well.',
+    aliases: ['add'],
+    usage: '[validUserName]',
 
     /**
-     * The display for the AddMember command.
+     * The display for the "addMember"-command.
      * 1. Checks if given member's name is already a member
-     * 2. Checks if given member's name is a valid osrs name.
+     * 2. Checks if given member's name is a valid osrs name
+     * 3a. Adds member's name to members.json
+     * 3b. Adds member's scores to scores.json
      *
      * @param message - contains the discord message handler
      * @param args - the given member's name
@@ -17,17 +20,29 @@ module.exports = {
      */
     async displayAddMember(message, args) {
         const checkedArgs = checks.arguments(args);
-        const isMember = checks.isMember(message, checkedArgs.officalName);
+        const isAlreadyMember = checks.isAlreadyMember(message, checkedArgs.officalName);
         const validUser = await checks.isValidUser(message, checkedArgs.fetchArg);
 
-        if (!isMember) {
+        if (isAlreadyMember === false) {
             if (validUser) {
                 try {
+                    // Get data from services
                     const {services} = message.client;
                     const membersService = services.get('membersService');
+                    const scoresService = services.get('scoresService');
 
-                    membersService.addMember(checkedArgs.officalName, validUser);
+                    // add member to memberslist
+                    membersService.addMember(checkedArgs.officalName);
                     message.channel.send('The member "' + checkedArgs.officalName + '" has been added to the memberslist!');
+
+                    // add the scores of new member to scoreslist
+                    const scores = await scoresService.fetchScoresOfMember(checkedArgs.fetchArg);
+                    scores.name = checkedArgs.officalName;
+
+                    await scoresService.addScoresOfMember(scores);
+                    membersService.getMembersFromFile();
+
+                    message.channel.send('The scores of member "' + checkedArgs.officalName + '" has been added to the scoreslist!');
                 } catch (error) {
                     message.channel.send('Couldn\'t add member. ' + error);
                 }

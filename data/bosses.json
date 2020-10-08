@@ -1,4 +1,5 @@
 {
+  "lastupdateddate": "1-8-2020",
   "bosses": [
     {
       "name": "Abyssal Sire",
@@ -20,7 +21,7 @@
     },
     {
       "name": "Bryophyta",
-      "alias": "bryophyta",
+      "alias": "bryo",
       "killhr": 0,
       "image": "https://oldschool.runescape.wiki/images/8/86/Bryophyta.png?090fd"
     },
@@ -50,8 +51,8 @@
     },
     {
       "name": "Chaos Elemental",
-      "alias": "chaos elemental",
-      "killhr": 48,
+      "alias": "chaos ele",
+      "killhr": 60,
       "image": "https://oldschool.runescape.wiki/images/a/a9/Chaos_Elemental.png?c170c"
     },
     {
@@ -63,7 +64,7 @@
     {
       "name": "Commander Zilyana",
       "alias": "sara",
-      "killhr": 25,
+      "killhr": 45,
       "image": "https://oldschool.runescape.wiki/images/f/fb/Commander_Zilyana.png?c5eaa"
     },
     {
@@ -135,7 +136,7 @@
     {
       "name": "King Black Dragon",
       "alias": "kbd",
-      "killhr": 100,
+      "killhr": 110,
       "image": "https://oldschool.runescape.wiki/images/e/e9/King_Black_Dragon.png?d25f0"
     },
     {
@@ -146,14 +147,14 @@
     },
     {
       "name": "Kree'Arra",
-      "killhr": 28,
       "alias": "arma",
+      "killhr": 28,
       "image": "https://oldschool.runescape.wiki/images/f/fd/Kree%27arra.png?65c34"
     },
     {
       "name": "K'ril Tsutsaroth",
       "alias": "zammy",
-      "killhr": 36,
+      "killhr": 40,
       "image": "https://oldschool.runescape.wiki/images/2/2f/K%27ril_Tsutsaroth.png?d22a3"
     },
     {
@@ -161,6 +162,12 @@
       "alias": "mimic",
       "killhr": 0,
       "image": "https://oldschool.runescape.wiki/images/f/f3/The_Mimic.png?c337b"
+    },
+    {
+      "name": "Nightmare",
+      "alias": "nightmare",
+      "killhr": 10,
+      "image": "https://oldschool.runescape.wiki/images/7/7d/The_Nightmare.png?0128a"
     },
     {
       "name": "Obor",
@@ -171,7 +178,7 @@
     {
       "name": "Sarachnis",
       "alias": "sarachnis",
-      "killhr": 45,
+      "killhr": 60,
       "image": "https://oldschool.runescape.wiki/images/e/e9/Sarachnis.png?8f040"
     },
     {
@@ -188,7 +195,7 @@
     },
     {
       "name": "The Gauntlet",
-      "alias": "gaunlet",
+      "alias": "gauntlet",
       "killhr": 10,
       "image": "https://oldschool.runescape.wiki/images/e/e4/Crystalline_Hunllef.png?7737a"
     },
@@ -237,7 +244,7 @@
     {
       "name": "Vorkath",
       "alias": "vorkath",
-      "killhr": 30,
+      "killhr": 32,
       "image": "https://oldschool.runescape.wiki/images/9/9a/Vorkath.png?1ce3f"
     },
     {

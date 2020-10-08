@@ -2,40 +2,55 @@ const checks = require('../helpers/checks');
 
 module.exports = {
     name: 'ehb',
-    description: 'Caculate EHB of member',
+    description: 'Will calculate and display the EHB of the given member.',
+    usage: '[validUserName]',
 
+    /**
+     * The display for the "ehb"-command.
+     * Will calculate and display the EHB of a valid user in the memberslist.
+     *
+     * @param message - contains the discord message handler
+     * @param args - the given member's name
+     * @returns {Promise<void>}
+     */
     async displayEHB(message, args) {
-        var checkedArgs = checks.arguments(args);
+        const checkedArgs = checks.arguments(args);
+        const validUser = await checks.isAlreadyMember(message, checkedArgs.officalName);
 
-        var ehbList = await this.getEHB(message, checkedArgs.fetchArg);
-
-        var endresult = 0.00;
-        for(var ehb of ehbList) {
-            endresult += +ehb;
+        if(validUser) {
+            const ehb = await this.getEHB(message, validUser);
+            message.channel.send('Total EHB of ' + validUser + ' is ' + ehb);
+        } else {
+            message.channel.send('The name "' + checkedArgs.officalName + '" is not in the memberslist!');
         }
-
-        message.channel.send('TOTAL EHB: ' + endresult);
     },
 
     async getEHB(message, checkedArgs) {
+        // Get data from services
         const { services } = message.client;
         const bossesService = services.get('bossesService');
-        const bossList = bossesService.getBossesFromFile();
+        const bossList = bossesService.getBossesList();
 
         const scoresService = services.get('scoresService');
-        var killcountList = await scoresService.getScoresOfMember(checkedArgs);
-        var ehb = [];
+        const killCountList = await scoresService.getScoresOfMember(checkedArgs);
 
-        var i;
-        for(i = 0; i < bossList.length; i++) {
-            var ehbVar = (killcountList[i]/bossList[i].killhr).toFixed(2);
-            if(isFinite(ehbVar) === false) {
-                ehbVar = 0;
+        let ehb = 0.00;
+
+        try{
+            // calculate ehb and add up
+            for(let i = 0; i < bossList.length; i++) {
+                let ehbVar = 0.00;
+                ehbVar = (killCountList[i] / bossList[i].killhr).toFixed(2);
+
+                if(isFinite(ehbVar) === false) {
+                    ehbVar = 0.00;
+                }
+                ehb += +ehbVar;
             }
-
-            ehb.push(ehbVar);
+        } catch (error) {
+            message.channel.send('Couldn\'t calculate ehb. ' + error);
         }
 
-        return ehb;
+        return ehb.toFixed(2);
     }
 };
