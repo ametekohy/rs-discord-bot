@@ -212,6 +212,12 @@
       "image": "https://oldschool.runescape.wiki/images/7/74/Verzik_Vitur.png?28c0a"
     },
     {
+      "name": "Theatre of Blood: Hard Mode",
+      "alias": "hm",
+      "killhr": 3,
+      "image": "https://oldschool.runescape.wiki/images/a/a1/Fighting_The_Maiden_of_Sugadinti.png?15b66"
+    },
+    {
       "name": "Thermonuclear Smoke Devil",
       "alias": "thermy",
       "killhr": 110,
